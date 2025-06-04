@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ویرایش پروفایل | وبسایت شما</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/base.css">
+
+    <style>
+        :root {
+            --primary-dark: #0a192f;
+            --primary-medium: #172a45;
+            --primary-light: #303f60;
+            --accent-color: #64ffda;
+            --text-primary: #e6f1ff;
+            --text-secondary: #8892b0;
+            --error-color: #ff6b6b;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--primary-dark);
+            color: var(--text-primary);
+            line-height: 1.6;
+            padding: 20px;
+        }
+        
+        .back-btn {
+            display: inline-block;
+            color: var(--accent-color);
+            text-decoration: none;
+            margin-bottom: 1rem;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+        
+        .back-btn:hover {
+            color: var(--text-primary);
+        }
+        
+        .profile-card {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: var(--primary-medium);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .profile-header {
+            background-color: var(--primary-light);
+            padding: 2rem;
+            text-align: center;
+            position: relative;
+        }
+        
+        .profile-name {
+            font-size: 1.5rem;
+            margin-bottom: 0.3rem;
+        }
+        
+        .profile-title {
+            color: var(--accent-color);
+            font-size: 1rem;
+        }
+        
+        .profile-body {
+            padding: 2rem;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-label {
+            display: block;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 0.8rem;
+            background-color: var(--primary-dark);
+            border: 1px solid var(--primary-light);
+            border-radius: 5px;
+            color: var(--text-primary);
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 2px rgba(100, 255, 218, 0.2);
+        }
+        
+        .select-control {
+            width: 100%;
+            padding: 0.8rem;
+            background-color: var(--primary-dark);
+            border: 1px solid var(--primary-light);
+            border-radius: 5px;
+            color: var(--text-primary);
+            font-size: 1rem;
+            cursor: pointer;
+        }
+        
+        .error-message {
+            color: var(--error-color);
+            font-size: 0.8rem;
+            margin-top: 0.3rem;
+            display: none;
+        }
+        
+        .action-btns {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 2rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 0.6rem 1.5rem;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s;
+            text-align: center;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+        
+        .save-btn {
+            background-color: var(--accent-color);
+            color: var(--primary-dark);
+        }
+        
+        .save-btn:hover {
+            background-color: transparent;
+            color: var(--accent-color);
+            outline: 1px solid var(--accent-color);
+        }
+        
+        .cancel-btn {
+            background-color: var(--primary-light);
+            color: var(--text-primary);
+        }
+        
+        .cancel-btn:hover {
+            background-color: #ff6b6b;
+            color: var(--text-primary);
+        }
+        
+        @media (max-width: 768px) {
+            .profile-card {
+                margin: 0;
+            }
+            
+            .profile-header {
+                padding: 1.5rem;
+            }
+            
+            .profile-body {
+                padding: 1.5rem;
+            }
+            
+            .action-btns {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="/profile" class="back-btn">
+        <i class="fas fa-arrow-right"></i> بازگشت به پروفایل
+    </a>
+    
+    <div class="profile-card">
+        <div class="profile-header">
+            <h2 class="profile-name">ویرایش پروفایل</h2>
+            <p class="profile-title">اطلاعات خود را به روزرسانی کنید</p>
+        </div>
+        
+        <div class="profile-body">
+            <form id="editProfileForm">
+                <div class="form-group">
+                    <label for="fullname" class="form-label">نام و نام خانوادگی</label>
+                    <input type="text" id="fullname" class="form-control" value="حسین مختاری">
+                    <div class="error-message" id="fullname-error">لطفاً نام و نام خانوادگی را وارد کنید</div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="phone" class="form-label">شماره تلفن</label>
+                    <input type="tel" id="phone" class="form-control" value="09999562748">
+                    <div class="error-message" id="phone-error">لطفاً شماره تلفن معتبر وارد کنید</div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="grade" class="form-label">پایه تحصیلی</label>
+                    <select id="grade" class="select-control">
+                        <option value="">-- انتخاب کنید --</option>
+                        <option value="7" selected>پایه هفتم</option>
+                        <option value="8">پایه هشتم</option>
+                        <option value="9">پایه نهم</option>
+                    </select>
+                    <div class="error-message" id="grade-error">لطفاً پایه تحصیلی را انتخاب کنید</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="fullname" class="form-label">نام شهر</label>
+                    <input type="text" id="fullname" class="form-control" value="رودان">
+                    <div class="error-message" id="fullname-error">لطفا نام شهر خود را وارد کنید </div>
+                </div>
+                
+                
+                <div class="action-btns">
+                    <button type="submit" class="btn save-btn">
+                        <i class="fas fa-save"></i> ذخیره تغییرات
+                    </button>
+                    <a href="/profile" class="btn cancel-btn">
+                        <i class="fas fa-times"></i> انصراف
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+</body>
+</html>

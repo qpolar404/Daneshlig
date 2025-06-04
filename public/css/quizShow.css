@@ -1,0 +1,285 @@
+:root {
+    /* پالت رنگی اصلی */
+    --deep-blue: #0a1f3a;
+    --dark-blue: #1a3a6a;
+    --medium-blue: #2a4a7a;
+    --light-blue: #64b5ff;
+    
+    /* رنگ‌های آکسانت جدید */
+    --electric-blue: #00f5ff;
+    --violet: #9d65ff;
+    --mint: #5ff2e0;
+    --pink: #ff6b9e;
+    
+    /* رنگ‌های متن */
+    --text-primary: #e6f1ff;
+    --text-secondary: #b8c2e0;
+}
+
+        @font-face {
+            font-family: 'dan';
+            src: url('../font/danstevis.otf') format('woff2');
+        }
+        @font-face {
+            font-family: 'rezvan';
+            src: url('../font/Rezvan.ttf') format('woff2');
+        }
+        @font-face {
+            font-family: 'BN';
+            src: url('../font/Vazir-Medium.woff2') format('woff2');
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: BN;
+        }
+        
+        body {
+           
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+          /* .container {
+    margin: 0;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #0077b6 0%, #00b4d8 100%);
+    background-attachment: fixed;
+    background-size: 200% 200%;
+    animation: gradientBG 15s ease infinite;
+  }
+
+  @keyframes gradientBG {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  } */
+
+
+        .container {
+                background: linear-gradient(-45deg, 
+                #0a1f3a, 
+                #1a3a6a, 
+                #142850, 
+                #203a43,
+                #2c5364);
+                background-size: 300% 300%;
+                animation: gradientFlow 12s ease infinite;
+        }
+
+        @keyframes gradientFlow {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+        .container {
+            min-width: 100%;
+            margin: 0 auto;
+            padding: 2rem;
+            
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, 
+            var(--electric-blue), 
+            var(--violet),
+            var(--pink));
+            -webkit-background-clip: text;
+            background-clip: text;
+            animation: textShine 5s ease infinite;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-top: 40px;
+        }
+        @keyframes textShine {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }       
+        .subtitle {
+            color: #3d414f ;
+            font-size: 1.1rem;
+        }
+        
+        .grades-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .grade-card {
+            bbackground: rgba(26, 58, 106, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(100, 181, 255, 0.3);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.1);
+            border-radius: 15px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            display: flex;
+            flex-direction: column;
+            height: 500px; /* ارتفاع ثابت برای کارت */
+        }
+        
+        .grade-card:hover {
+             transform: translateY(-8px) scale(1.02);
+             box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+             border-color: var(--electric-blue);
+        }
+        
+        .grade-header {
+            background: linear-gradient(90deg, 
+        rgba(0, 245, 255, 0.1), 
+        rgba(157, 101, 255, 0.2));
+            padding: 1.5rem;
+            text-align: center;
+            position: relative;
+            backdrop-filter: blur(5px);
+        }
+        
+        .grade-header h2 {
+            background: linear-gradient(90deg,
+            var(--mint),
+            var(--electric-blue));
+            -webkit-background-clip: text;
+            background-clip: text;
+        }
+        
+        .grade-header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(90deg, #64ffda, #48aff0);
+            border-radius: 3px;
+        }
+        
+        .books-list {
+            padding: 1.5rem;
+            overflow-y: auto;
+            flex: 1;
+            scrollbar-width: thin;
+            scrollbar-color: var(--accent-blue) var(--primary-medium);
+        }
+        
+        /* استایل اسکرول بار برای مرورگرهای وبکیت */
+        .books-list::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        .books-list::-webkit-scrollbar-track {
+            background: rgba(10, 25, 47, 0.3);
+            border-radius: 10px;
+        }
+        
+        .books-list::-webkit-scrollbar-thumb {
+            background: linear-gradient(var(--accent-blue), #48aff0);
+            border-radius: 10px;
+        }
+        
+        .books-list::-webkit-scrollbar-thumb:hover {
+            background: var(--accent-blue);
+        }
+        
+        .book-item {
+            display: flex;
+            align-items: center;
+            padding: 1rem;
+            margin-bottom: 0.8rem;
+            border-radius: 8px;
+            background: rgba(10, 31, 58, 0.5);
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(100, 255, 218, 0.1);
+        }
+        
+        .book-item:hover {
+            background: linear-gradient(90deg,
+                rgba(95, 242, 224, 0.1),
+                rgba(157, 101, 255, 0.1));
+            transform: translateX(5px);
+            border-left: 3px solid var(--pink);
+        }
+        
+        .book-icon {
+            width: 45px;
+            height: 45px;
+            background: linear-gradient(135deg, 
+                rgba(0, 245, 255, 0.2), 
+                rgba(255, 107, 158, 0.2));
+            color: var(--electric-blue);
+            animation: iconPulse 3s ease infinite;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: 1rem;
+            color: #649bff;
+            font-size: 1.1rem;
+            flex-shrink: 0;
+        }
+        @keyframes iconPulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        .book-info {
+            flex: 1;
+        }
+        
+        .book-title {
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+            font-size: 1.1rem;
+        }
+        
+        .book-desc {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+        
+        .quiz-badge {
+            background: linear-gradient(90deg,
+                var(--violet),
+                var(--pink));
+            animation: badgeGlow 2s ease infinite alternate;
+            color: var(--primary-dark);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            margin-right: 0.5rem;
+            flex-shrink: 0;
+        }
+        @keyframes badgeGlow {
+            from { box-shadow: 0 0 5px rgba(157, 101, 255, 0.5); }
+            to { box-shadow: 0 0 15px rgba(255, 107, 158, 0.8); }
+        }
+        @media (max-width: 768px) {
+            .grades-container {
+                grid-template-columns: 1fr;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .grade-card {
+                height: auto;
+                max-height: 500px;
+            }
+        }

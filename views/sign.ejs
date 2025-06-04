@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ثبت‌نام | وبسایت شما</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-dark: #0a192f;
+            --primary-medium: #172a45;
+            --primary-light: #303f60;
+            --accent-color: #64ffda;
+            --text-primary: #e6f1ff;
+            --text-secondary: #8892b0;
+            --error-color: #ff6b6b;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--primary-dark);
+            color: var(--text-primary);
+            line-height: 1.6;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .auth-container {
+            width: 100%;
+            max-width: 500px;
+        }
+        
+        .auth-card {
+            background-color: var(--primary-medium);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            padding: 2rem;
+        }
+        
+        .auth-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .auth-title {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+            color: var(--accent-color);
+        }
+        
+        .auth-subtitle {
+            color: var(--text-secondary);
+            font-size: 1rem;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-label {
+            display: block;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 0.8rem;
+            background-color: var(--primary-dark);
+            border: 1px solid var(--primary-light);
+            border-radius: 5px;
+            color: var(--text-primary);
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 2px rgba(100, 255, 218, 0.2);
+        }
+        
+        .error-message {
+            color: var(--error-color);
+            font-size: 0.8rem;
+            margin-top: 0.3rem;
+            display: none;
+        }
+        
+        .auth-btn {
+            width: 100%;
+            padding: 0.8rem;
+            background-color: var(--accent-color);
+            color: var(--primary-dark);
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 1rem;
+        }
+        
+        .auth-btn:hover {
+            background-color: transparent;
+            color: var(--accent-color);
+            outline: 1px solid var(--accent-color);
+        }
+        
+        .auth-footer {
+            text-align: center;
+            margin-top: 1.5rem;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+        
+        .auth-link {
+            color: var(--accent-color);
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        
+        .auth-link:hover {
+            text-decoration: underline;
+        }
+        
+        .password-strength {
+            height: 5px;
+            background-color: var(--primary-light);
+            margin-top: 0.5rem;
+            border-radius: 3px;
+            overflow: hidden;
+        }
+        
+        .strength-meter {
+            height: 100%;
+            width: 0;
+            background-color: var(--error-color);
+            transition: all 0.3s;
+        }
+    </style>
+</head>
+<body>
+    <div class="auth-container">
+        <div class="auth-card">
+            <div class="auth-header">
+                <h2 class="auth-title">ثبت‌نام در وبسایت</h2>
+                <p class="auth-subtitle">لطفاً اطلاعات خود را وارد کنید</p>
+            </div>
+            <form id="signupForm" action="/signUp-person" method="post" enctype="application/x-www-form-urlencoded">
+                <div class="form-group">
+                    <label for="fullname" class="form-label">نام و نام خانوادگی</label>
+                    <input name="fullName" type="text" id="fullname" class="form-control" placeholder="نام و نام خانوادگی خود را وارد کنید">
+                    <div class="error-message" id="fullname-error">لطفاً نام و نام خانوادگی را وارد کنید</div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="username" class="form-label">نام کاربری</label>
+                    <input name="username" type="text" id="username" class="form-control" placeholder="نام کاربری خود را انتخاب کنید">
+                    <div class="error-message" id="username-error">لطفاً نام کاربری را وارد کنید</div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="phone" class="form-label">شماره تلفن</label>
+                    <input name="phoneNumber" type="tel" id="phone" class="form-control" placeholder="شماره تلفن خود را وارد کنید">
+                    <div class="error-message" id="phone-error">لطفاً شماره تلفن معتبر وارد کنید</div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="city" class="form-label">نام شهر</label>
+                    <input name="city" type="text" id="city" class="form-control" placeholder="نام شهر خود را وارد کنید ">
+                    <div class="error-message" id="city-error">لطفا نام شهر خود را انتخاب کنید</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="grade" class="form-label">پایه تحصیلی</label>
+                    <select  name="gear" id="grade" class="form-control">
+                        <option value="">-- انتخاب کنید --</option>
+                        <option value="7">پایه هفتم</option>
+                        <option value="8">پایه هشتم</option>
+                        <option value="9">پایه نهم</option>
+
+                    </select>
+                    <div class="error-message" id="grade-error">لطفاً پایه تحصیلی را انتخاب کنید</div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="password" class="form-label">رمز عبور</label>
+                    <input  name="password" type="password" id="password" class="form-control" placeholder="رمز عبور خود را انتخاب کنید">
+                    <div class="error-message" id="password-error">لطفاً رمز عبور را وارد کنید</div>
+                    <div class="password-strength">
+                        <div class="strength-meter" id="strengthMeter"></div>
+                    </div>
+                </div>
+                
+              
+                
+                <button type="submit" class="auth-btn">
+                    <i class="fas fa-user-plus"></i> ثبت‌نام
+                </button>
+              </form>
+           
+            
+            <div class="auth-footer">
+                قبلاً ثبت‌نام کرده‌اید؟ <a href="/login" class="auth-link">وارد شوید</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+      document.getElementById('signupForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        
+        // 1. جمع‌آوری داده‌های فرم
+        const formData = new FormData(e.target);
+        const data = Object.fromEntries(formData);
+        
+        try {
+          // 2. ارسال درخواست به سرور
+          const response = await fetch('/signUp-person', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data)
+          });
+    
+          // 3. پردازش پاسخ
+          const result = await response.json();
+    
+          if (!response.ok) {
+            throw new Error(result.message || 'خطا در ثبت نام');
+          }
+    
+          // 4. نمایش پیغام موفقیت
+          Swal.fire({
+            icon: 'success',
+            title: 'موفقیت!',
+            text: result.message,
+            confirmButtonText: 'باشه'
+          }).then(() => {
+            // 5. انتقال به صفحه پروفایل یا لاگین
+        }).then(() => {
+        window.location.href = '/profile';
+     
+          });
+    
+        } catch (error) {
+          // 6. مدیریت خطاها
+          Swal.fire({
+            icon: 'error',
+            title: 'خطا!',
+            text: error.message || 'مشکلی در ثبت نام پیش آمد',
+            confirmButtonText: 'متوجه شدم'
+          });
+          console.error('Error:', error);
+        }
+      });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>آموزش استفاده از سایت</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #4e73df;
+            --secondary-color: #f8f9fc;
+            --text-color: #5a5c69;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Vazir', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f8f9fc;
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary-color), #224abe);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            border-radius: 0 0 20px 20px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            margin-bottom: 3rem;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        .video-container {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 30px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+        
+        .video-wrapper {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+            height: 0;
+            overflow: hidden;
+            margin: 2rem 0;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .feature-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .feature-card i {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+        
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+        
+        footer {
+            text-align: center;
+            padding: 2rem;
+            background-color: white;
+            border-radius: 20px 20px 0 0;
+            box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.05);
+            margin-top: 2rem;
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .container {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1><i class="fas fa-film"></i> آموزش استفاده از سایت</h1>
+            <p class="subtitle">ویدیوی زیر را مشاهده کنید تا با نحوه کار با سایت آشنا شوید</p>
+        </div>
+    </header>
+    
+    <div class="container">
+        <div class="video-container">
+            <h2><i class="fas fa-play-circle"></i> راهنمای تصویری استفاده از سایت</h2>
+            <p>در این ویدیو تمام مراحل کار با سایت به صورت کامل توضیح داده شده است</p>
+            
+            <div class="video-wrapper">
+                <!-- جایگزین کنید با کد embed ویدیوی آپارات خود -->
+                <iframe src="https://www.aparat.com/v/swh7kcd" 
+                        allowfullscreen></iframe>
+            </div>
+            
+            <p>در صورت داشتن هرگونه سوال، از قسمت تماس با ما اقدام کنید</p>
+        </div>
+        
+        <div class="features">
+            <div class="feature-card">
+                <i class="fas fa-user-plus"></i>
+                <h3>ثبت نام آسان</h3>
+                <p>در کمتر از 1 دقیقه در سایت عضو شوید و از تمام امکانات استفاده کنید</p>
+            </div>
+            
+            <div class="feature-card">
+                <i class="fas fa-lock"></i>
+                <h3>امنیت بالا</h3>
+                <p>اطلاعات شما با بالاترین سطح امنیتی در سایت ذخیره می‌شود</p>
+            </div>
+            
+            <div class="feature-card">
+                <i class="fas fa-headset"></i>
+                <h3>پشتیبانی 24/7</h3>
+                <p>تیم پشتیبانی ما همیشه آماده پاسخگویی به سوالات شماست</p>
+            </div>
+        </div>
+    </div>
+    
+    <footer>
+        <div class="container">
+            <p>تمامی حقوق برای حسین مختاری محفوظ است © 2025</p>
+            <div class="social-links" style="margin-top: 1rem;">
+                <a href="#" style="color: var(--text-color); margin: 0 10px;"><i class="fab fa-instagram fa-2x"></i></a>
+                <a href="#" style="color: var(--text-color); margin: 0 10px;"><i class="fab fa-telegram fa-2x"></i></a>
+                <a href="#" style="color: var(--text-color); margin: 0 10px;"><i class="fab fa-aparat fa-2x"></i></a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,170 @@
+
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ورود به حساب کاربری | وبسایت شما</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #000e6b;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+        
+        #registerForm {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 450px;
+        }
+        
+        #registerForm h2 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 25px;
+            font-size: 24px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        #registerForm input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: all 0.3s;
+        }
+        
+        #registerForm input:focus {
+            border-color: #3498db;
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+            outline: none;
+        }
+        
+        #registerForm button {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 12px;
+            width: 100%;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+        
+        #registerForm button:hover {
+            background-color: #2980b9;
+        }
+        
+        .input-icon {
+            position: relative;
+        }
+        
+        .input-icon i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #7f8c8d;
+        }
+        
+        .input-icon input {
+            padding-right: 15px;
+            padding-left: 40px;
+        }
+        
+        @media (max-width: 480px) {
+            #registerForm {
+                padding: 20px;
+            }
+        }
+    </style>
+    <!-- لینک فونت آیکون (اختیاری) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <form id="registerForm">
+        <h2>ورود در سایت</h2>
+        
+        <div class="form-group input-icon">
+            <i class="fas fa-user"></i>
+            <input type="text" name="username" placeholder="نام کاربری" required>
+        </div>
+        
+        <div class="form-group input-icon">
+            <i class="fas fa-lock"></i>
+            <input type="password" name="password" placeholder="رمز عبور" required>
+        </div>
+        
+        <button type="submit">ثبت‌نام</button>
+        <p>حساب ندارید؟<a href="/signUp">ثبت نام</a></p>
+        
+    </form>
+      
+      <!-- اضافه کردن SweetAlert -->
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+      
+      <script>
+      document.getElementById('registerForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  
+  const username = e.target.username.value;
+  const password = e.target.password.value;
+
+  try {
+    const response = await fetch('http://localhost:8080/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ username, password })
+    });
+
+    // لاگ پاسخ برای دیباگ
+    console.log('وضعیت پاسخ:', response.status);
+    
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.message || 'خطای شبکه');
+    }
+
+    const result = await response.json();
+    
+    if (result.success) {
+      Swal.fire({
+        icon: 'success',
+        title: 'موفق!',
+        text: result.message,
+      }).then(() => {
+        window.location.href = '/profile';
+      });
+    }
+  } catch (error) {
+    console.error('خطا:', error);
+    Swal.fire({
+      icon: 'error',
+      title: 'خطا!',
+      text: error.message || 'مشکلی در ارتباط با سرور پیش آمد',
+    });
+  }
+});
+      </script>
+</body>
+</html>

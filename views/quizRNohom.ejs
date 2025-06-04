@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>Simple Quiz</title>
+    
+    
+    <style>
+@font-face {
+            font-family: 'BN';
+            src: url('../font/Vazir-Medium.woff2') format('woff2');
+}
+
+* {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: BN;
+    }
+body{
+    background: #001e4d;
+    
+}
+.app{
+    background: #fff;
+    width: 90%;
+    max-width: 600px;
+    margin: 100px auto 0;
+    border-radius: 30px;
+    padding: 30px;
+}
+.app h1{
+    font-size: 25px;
+    color:#001e4d ;
+    font-weight: 600;
+    border-bottom: 1px solid #333;
+    padding-bottom: 30px;
+
+}
+.quiz{
+    padding: 20px 0;
+
+}
+.quiz h2{
+    font-size: 18px;
+    color: #001e4d;
+    font-weight: 600;
+}
+.btn-box {
+    display: flex
+;
+    justify-content: space-between;
+}
+.btn{
+    display: flex;
+    background: #fff;
+    color: #222;
+    font-weight: 500;
+    width: 100%;
+    border:1px solid #222 ;
+    padding: 10px;
+    margin: 10px 0;
+    text-align: left;
+    border-radius: 4px;
+    transition:  0.3s;
+
+}
+.btn:hover:not([disabled]){
+   
+    background: #222;
+    color: #fff;
+
+}
+.btn:disabled{
+    cursor:no-drop;
+}
+#next-btn{
+background-color: #001e4d;
+color: #fff;
+font-weight: 500;
+width: 150px;
+padding: 10px;
+margin: 20px auro;
+border-radius: 4px;
+cursor: pointer;
+display: none;
+}
+.next-btn{
+background-color: #001e4d;
+color: #fff;
+font-weight: 500;
+width: 150px;
+padding: 10px;
+margin: 20px auro;
+border-radius: 4px;
+cursor: pointer;
+
+}
+.correct{
+    background-color:#9aeabc ;
+}
+.inCorrect{
+    background-color:#ff9393 ;
+}
+.green{
+    margin-top: 5px;
+    color:#00a547 ;
+}
+
+    </style>
+    
+</head>
+<body>
+    <div class="app">
+        <h1>کوییز ریاضی نهم</h1>
+        <div class="quiz">
+            <h2 id="question">گزینه درست را انتخاب کنید</h2>
+            <div id="answer-buttons">
+                <button class="btn">Answer 1</button>
+                <button class="btn">Answer 2</button>
+                <button class="btn">Answer 3</button>
+                <button class="btn">Answer 4</button>
+            </div>
+            <div class="btn-box">
+                <button id="next-btn">
+                Next
+            </button>
+            <a class="next-btn" href="/">
+                بازگشت به خانه
+            </a>
+            </div>
+        </div>
+    </div>
+    <script>const questions = [
+    {
+        question:"(25x - 1)=",
+        answers:[
+                {text:'(5x-1)(5x+1)',correct:true},
+                {text:'(5x+1)(5x+1)',correct:false},
+                {text:'(5x-1)(5x+-1)',correct:false},
+                {text:'(5x+1)(5x-21)',correct:false}
+        ]
+    },
+    {
+        question:"x^2 + 5x + 6",
+        answers:[
+                {text:'(x+9)(x+5)',correct:false},
+                {text:'(x-3)(x+2)',correct:false},
+                {text:'(x-2)(x-3)',correct:false},
+                {text:'(x+2)(x+3)',correct:true}
+        ]
+    },
+    {
+        question:"10+10*10",
+        answers:[
+                {text:'100',correct:false},
+                {text:'90',correct:false},
+                {text:'110',correct:true},
+                {text:'200',correct:false} 
+        ]
+    },
+    {
+        question:"(5^x)گویا است؟",
+        answers:[
+                {text:'بله',correct:false},
+                {text:'نمیدانم',correct:false},
+                {text:'خیر',correct:true},
+                {text:'شاید',correct:false}  
+        ]
+    }
+];
+
+const questionElement = document.getElementById('question');
+const answerButtons = document.getElementById('answer-buttons');
+const nextButton = document.getElementById('next-btn');
+
+let currentQuestionIndex = 0 ; 
+let score = 0;
+
+function startQuiz(){
+    currentQuestionIndex=0;
+    score=0;
+    nextButton.innerHTML="بعدی";
+    showQuestion();
+}
+
+function showQuestion(){
+    resetState();
+    let currentQuestion = questions[currentQuestionIndex];
+    let questionNo = currentQuestionIndex + 1;
+    questionElement.innerHTML=questionNo+". "+currentQuestion.question;
+
+    currentQuestion.answers.forEach(answer =>{
+        const button = document.createElement('button');
+        button.innerHTML=answer.text;
+        button.classList.add('btn');
+        answerButtons.appendChild(button);
+        if(answer.correct){
+            button.dataset.correct=answer.correct;
+        }
+        button.addEventListener('click',selectAnswer);
+    });
+}
+
+function resetState(){
+    nextButton.style.display='none';
+    while(answerButtons.firstChild){
+        answerButtons.removeChild(answerButtons.firstChild);
+
+    }
+}
+function selectAnswer(e){
+    const selectBtn = e.target;
+    const isCorrect= selectBtn.dataset.correct === 'true';
+    if(isCorrect){
+        selectBtn.classList.add('correct');
+        score++;
+    }else{
+        selectBtn.classList.add('inCorrect')
+    }
+    Array.from(answerButtons.children).forEach(button=>{
+        if(button.dataset.correct === true){
+            button.classList.add('correct');
+        }
+        button.disabled=true;
+    })
+    nextButton.style.display='block';
+}
+
+function showScore(){
+    resetState();
+    questionElement.innerHTML=`امتیاز شما:${score} از ${questions.length}`;
+    nextButton.innerHTML='کوییز مجدد';
+    nextButton.style.display='block';
+    if(score ===questions.length){
+        const p = document.createElement('p')
+        p.innerHTML="عالیههه!!!"
+        p.classList.add('green')
+        questionElement.appendChild(p);
+
+    }
+}
+
+function handelNextButton(){
+    currentQuestionIndex++;
+    if(currentQuestionIndex < questions.length){
+        showQuestion()
+    }else{
+        showScore()
+    }
+}
+
+
+nextButton.addEventListener('click', ()=>{
+    if(currentQuestionIndex < questions.length){
+        handelNextButton();
+    }else{
+        startQuiz();
+    }
+})
+
+
+startQuiz()</script>
+</body>
+</html>
