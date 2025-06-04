@@ -17,8 +17,10 @@ app.use(express.urlencoded({ extended: true }));
 // 2. اتصال به دیتابیس
 const dbURI = 'mongodb+srv://amir:test1234@qpcodecompany.8gljb.mongodb.net/DaneshLig?retryWrites=true&w=majority&appName=qPCodeCompany';
 
+const PORT = process.env.PORT || 3000; 
+
 mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
-    .then((result) => app.listen(8080, () => console.log('-------------------------server is runing-----------------------')))
+    .then((result) => app.listen(PORT, () => console.log(`Server is running on port ${PORT}`))) // پورت PORT اینجا باشه
     .catch((err) => console.log(err));
 
 // 3. مسیرهای اصلی
