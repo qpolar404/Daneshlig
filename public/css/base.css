@@ -692,6 +692,7 @@ a.demo--current {
 	padding: 60px 0 0;
 	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 	box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.1);
+	direction: rtl;
   }
   
   .footer-container {
@@ -738,7 +739,7 @@ a.demo--current {
   .link-title::after {
 	content: '';
 	position: absolute;
-	left: 0;
+	right: 0;
 	bottom: 0;
 	width: 50px;
 	height: 2px;
@@ -792,7 +793,7 @@ a.demo--current {
   .social-title::after, .newsletter-title::after {
 	content: '';
 	position: absolute;
-	left: 0;
+	right: 0;
 	bottom: 0;
 	width: 50px;
 	height: 2px;
