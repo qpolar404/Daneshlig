@@ -186,17 +186,3 @@
     new Slideshow(document.querySelector('.slideshow'));
     imagesLoaded('.slide__img', { background: true }, () => document.body.classList.remove('loading'));
 };
-// اسکریپت برای sticky navbar و تغییر رنگ
-window.addEventListener('scroll', function() {
-    const navbar = document.getElementById('navbar');
-    if (window.scrollY > 50) {
-        navbar.classList.add('scrolled');
-    } else {
-        navbar.classList.remove('scrolled');
-    }
-});
-
-// اسکریپت برای منوی همبرگری در موبایل
-document.getElementById('menuToggle').addEventListener('click', function() {
-    document.getElementById('navLinks').classList.toggle('active');
-});

@@ -398,7 +398,7 @@ a.demo--current {
 .slide__title {
 	position: relative;
 	font-size: var(--fontsize-stitle);
-	margin: 0;
+	margin-bottom: 25px;
 	cursor: default;
 	line-height: 1;
 	color: var(--color-stitle);

@@ -1,15 +1,32 @@
-        <div class="menu-toggle" id="menuToggle">☰</div>
-			
-			<ul class="nav-links" id="navLinks">
-				
-				<li><a href="/anoutUs">درباره ما</a></li>
-				<li><a href="/BeZoudy">نمونه سوال</a></li>
-				<li><a href="/quizShow">کوییز شو</a></li>
-				<li><a href="/majeraJoyi">آموزش ها</a></li>
-				<li><a href="/">خانه</a></li>
-			</ul>
+<div class="menu-toggle" id="menuToggle">☰</div>
 
-			<a class="logo" href="/">
-				
-				<span>دانش لیگ</span>
-			</a>
+<ul class="nav-links" id="navLinks">
+
+	<li><a href="/anoutUs">درباره ما</a></li>
+	<li><a href="/BeZoudy">نمونه سوال</a></li>
+	<li><a href="/quizShow">کوییز شو</a></li>
+	<li><a href="/majeraJoyi">آموزش ها</a></li>
+	<li><a href="/">خانه</a></li>
+</ul>
+
+<a class="logo" href="/">
+
+	<span>دانش لیگ</span>
+</a>
+</div>
+
+
+<script>// اسکریپت برای sticky navbar و تغییر رنگ
+	window.addEventListener('scroll', function () {
+		const navbar = document.getElementById('navbar');
+		if (window.scrollY > 50) {
+			navbar.classList.add('scrolled');
+		} else {
+			navbar.classList.remove('scrolled');
+		}
+	});
+
+	// اسکریپت برای منوی همبرگری در موبایل
+	document.getElementById('menuToggle').addEventListener('click', function () {
+		document.getElementById('navLinks').classList.toggle('active');
+	});</script>
