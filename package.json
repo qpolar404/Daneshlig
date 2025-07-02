@@ -3,19 +3,19 @@
   "version": "1.0.0",
   "description": "DaneshLig web application for Khwarizmi festival",
   "main": "app.js",
-  "scripts": { 
-    "start": "node app.js", 
-    "dev": "nodemon app.js" 
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js"
   },
   "dependencies": {
     "bcrypt": "^5.1.1",
     "cors": "^2.8.5",
     "crypt": "^0.0.2",
     "ejs": "^3.1.10",
-    "expres": "^0.0.5", 
+    "expres": "^0.0.5",
     "express": "^5.1.0",
     "lodash": "^4.17.21",
-    "mongoose": "^8.15.0",
+    "mongoose": "^8.16.1",
     "morgan": "^1.10.0",
     "nodemon": "^3.1.10",
     "path": "^0.12.7",

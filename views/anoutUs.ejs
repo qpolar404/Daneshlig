@@ -1,204 +1,375 @@
 <!DOCTYPE html>
-<html lang="fa" dir="rtl" >
+<html lang="fa" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>دانش لیگ | <%= title %> </title>
+    <title>درباره دانش‌لیگ | انقلابی در یادگیری</title>
    
     <style>
         :root {
-            --dark-bg: #121212;
-            --dark-card: #1E1E1E;
-            --primary: #4CAF50;
-            --secondary: #2196F3;
-            --text: #E0E0E0;
-            --text-light: #B0B0B0;
+            --primary-dark: #0a192f;
+            --primary-light: #172a45;
+            --accent-blue: #64ffda;
+            --text-primary: #ccd6f6;
+            --text-secondary: #8892b0;
         }
         
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--dark-bg) !important;
-            color: var(--text);
+        @font-face {
+            font-family: 'BN';
+            src: url('../font/Vazir-Medium.woff2') format('woff2');
+        }
+
+        * {
             margin: 0;
             padding: 0;
-            line-height: 1.8;
+            box-sizing: border-box;
+            font-family: BN;
+        }
+        body {
+            background-color: var(--primary-dark);
+            color: var(--text-primary);
+            line-height: 1.6;
         }
         
         .container {
-            max-width: 900px;
+            max-width: 1200px;
             margin: 0 auto;
-            padding: 2rem;
+            padding: 0 20px;
         }
         
         header {
+            padding: 80px 0 40px;
             text-align: center;
-            margin-bottom: 3rem;
-            border-bottom: 1px solid #333;
-            padding-bottom: 1.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        header::before {
+            content: "";
+            position: absolute;
+            top: -50px;
+            left: -50px;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(100, 255, 218, 0.1) 0%, rgba(100, 255, 218, 0) 70%);
+            z-index: -1;
+        }
+        
+        header::after {
+            content: "";
+            position: absolute;
+            bottom: -100px;
+            right: -100px;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(100, 255, 218, 0.05) 0%, rgba(100, 255, 218, 0) 70%);
+            z-index: -1;
         }
         
         h1 {
-            color: var(--primary);
-            font-size: 2.5rem;
-            margin-bottom: 0.5rem;
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            background: linear-gradient(90deg, var(--accent-blue), #4facfe);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            position: relative;
+            display: inline-block;
         }
         
-        h2 {
-            color: var(--secondary);
-            font-size: 1.8rem;
-            margin-top: 2.5rem;
-        }
-        p{
-            color: #e8f5ff;
-        }
-        
-        .intro {
-            background-color: var(--dark-card);
-            padding: 2rem;
-            border-radius: 8px;
-            margin-bottom: 2rem;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        h1::after {
+            content: "";
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent-blue), #4facfe);
         }
         
-        .features {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
-            margin: 2rem 0;
+        .tagline {
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+            margin-bottom: 40px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
         }
         
-        .feature-card {
-            background-color: var(--dark-card);
-            padding: 1.5rem;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        .main-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            padding: 60px 0;
+        }
+        
+        .founder-section {
+            flex: 1;
+            min-width: 300px;
+            background: var(--primary-light);
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            position: relative;
+            overflow: hidden;
             transition: transform 0.3s ease;
         }
         
-        .feature-card:hover {
-            transform: translateY(-5px);
+        .founder-section:hover {
+            transform: translateY(-10px);
         }
         
-        .feature-card h3 {
-            color: var(--primary);
-            margin-top: 0;
+        .founder-section::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--accent-blue), #4facfe);
         }
         
-        .cta {
+        .founder-image {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 3px solid var(--accent-blue);
+            margin: 0 auto 20px;
+            display: block;
+            object-fit: cover;
+            box-shadow: 0 5px 15px rgba(100, 255, 218, 0.3);
+        }
+        
+        .founder-title {
             text-align: center;
-            margin: 3rem 0;
+            margin-bottom: 20px;
         }
         
-        .btn {
+        .founder-title h2 {
+            font-size: 1.8rem;
+            margin-bottom: 5px;
+            color: var(--accent-blue);
+        }
+        
+        .founder-title p {
+            color: var(--text-secondary);
+            font-size: 1rem;
+        }
+        
+        .founder-bio {
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+            text-align: justify;
+        }
+        
+        .mission-section {
+            flex: 2;
+            min-width: 300px;
+            background: var(--primary-light);
+            border-radius: 10px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            position: relative;
+        }
+        
+        .mission-section h2 {
+            font-size: 2rem;
+            margin-bottom: 30px;
+            color: var(--accent-blue);
+            position: relative;
             display: inline-block;
-            background-color: var(--primary);
-            color: white;
-            padding: 0.8rem 1.5rem;
+        }
+        
+        .mission-section h2::after {
+            content: "";
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 50%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent-blue), #4facfe);
+        }
+        
+        .mission-text {
+            margin-bottom: 30px;
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+        
+        .highlight-box {
+            background: rgba(100, 255, 218, 0.1);
+            border-left: 3px solid var(--accent-blue);
+            padding: 20px;
+            margin: 30px 0;
+            border-radius: 0 5px 5px 0;
+        }
+        
+        .highlight-box p {
+            color: var(--text-primary);
+            font-size: 1.2rem;
+            font-style: italic;
+        }
+        
+        .vision-section {
+            width: 100%;
+            background: var(--primary-light);
+            border-radius: 10px;
+            padding: 40px;
+            margin-top: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .vision-section::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100px;
+            height: 100px;
+            background: radial-gradient(circle, rgba(100, 255, 218, 0.1) 0%, rgba(100, 255, 218, 0) 70%);
+            z-index: 0;
+        }
+        
+        .vision-section h2 {
+            font-size: 2rem;
+            margin-bottom: 30px;
+            color: var(--accent-blue);
+            position: relative;
+            z-index: 1;
+        }
+        
+        .vision-text {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            line-height: 1.8;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .cta-section {
+            text-align: center;
+            padding: 60px 0;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            padding: 15px 30px;
+            background: transparent;
+            color: var(--accent-blue);
+            border: 2px solid var(--accent-blue);
+            border-radius: 5px;
+            font-size: 1.2rem;
             text-decoration: none;
-            border-radius: 4px;
-            margin: 0 0.5rem;
-            transition: background-color 0.3s;
-            font-weight: bold;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
         }
         
-        .btn:hover {
-            background-color: #3d8b40;
+        .cta-button:hover {
+            background: rgba(100, 255, 218, 0.1);
+            box-shadow: 0 0 20px rgba(100, 255, 218, 0.3);
+            transform: translateY(-3px);
         }
         
-        .btn-secondary {
-            background-color: var(--secondary);
+        .cta-button::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(100, 255, 218, 0.2), transparent);
+            transition: 0.5s;
         }
         
-        .btn-secondary:hover {
-            background-color: #0b7dda;
+        .cta-button:hover::before {
+            left: 100%;
         }
         
         footer {
             text-align: center;
-            margin-top: 3rem;
-            padding-top: 2rem;
-            border-top: 1px solid #333;
-            color: var(--text-light);
+            padding: 30px 0;
+            color: var(--text-secondary);
             font-size: 0.9rem;
+            border-top: 1px solid rgba(100, 255, 218, 0.1);
         }
         
         @media (max-width: 768px) {
-            .features {
-                grid-template-columns: 1fr;
+            h1 {
+                font-size: 2.5rem;
             }
             
-            .btn {
-                display: block;
-                margin: 0.5rem auto;
-                max-width: 200px;
+            .tagline {
+                font-size: 1.2rem;
+            }
+            
+            .main-content {
+                flex-direction: column;
             }
         }
     </style>
-     <link rel="stylesheet" type="text/css" href="css/base.css" />
+
 </head>
 <body>
-    <nav class="navbar" id="navbar" dir="ltr">
-		<%- include('partials/nav') %>
-    </nav>
     <div class="container">
         <header>
-            <h1>درباره دانش‌لیگ</h1>
-            <p>یادگیری را هیجان‌انگیز کنید!</p>
+            <h1>دانش‌لیگ</h1>
+            <p class="tagline">یادگیری را هیجان‌انگیز کنید!</p>
         </header>
         
-        <section class="intro">
-            <h2>سلام! من حسین مختاری هستم، یک دانش‌آموز مثل شما.</h2>
-            <p>همیشه از اینکه بعضی از دوستانم در درس‌ها مشکل داشتند ناراحت می‌شدم. تا اینکه یک روز ایده‌ای به ذهنم رسید: <strong>چرا فضایی ایجاد نکنیم که درس خواندن هم مفید باشد هم لذت‌بخش؟</strong></p>
-            <p>اینطوری شد که <strong>دانش‌لیگ</strong> متولد شد؛ جایی که یادگیری تبدیل به یک تجربه گروهی و پرانرژی می‌شود.</p>
-        </section>
-        
-        <h2>چرا دانش‌لیگ؟</h2>
-        
-        <div class="features">
-            <div class="feature-card">
-                <h3>یادگیری تعاملی</h3>
-                <p>درس‌ها را از طریق رقابت‌های جذاب و چالش‌های گروهی یاد بگیرید.</p>
+        <div class="main-content">
+            <div class="founder-section">
+
+                <div class="founder-title">
+                    <h2>حسین مختاری</h2>
+                    <p>بنیان‌گذار دانش‌لیگ</p>
+                </div>
+                <p class="founder-bio">
+                    "سلام! من حسین مختاری هستم، یک دانش‌آموز مثل شما. همیشه از اینکه بعضی از دوستانم در درس‌ها مشکل داشتند ناراحت می‌شدم. تا اینکه یک روز ایده‌ای به ذهنم رسید: چرا فضایی ایجاد نکنیم که درس خواندن هم مفید باشد هم لذت‌بخش؟"
+                </p>
             </div>
             
-            <div class="feature-card">
-                <h3>انگیزه مضاعف</h3>
-                <p>سیستم امتیازدهی و جوایز، اشتیاق شما برای پیشرفت را بیشتر می‌کند.</p>
+            <div class="mission-section">
+                <h2>ماموریت ما</h2>
+                <p class="mission-text">
+                    دانش‌لیگ متولد شد تا یادگیری را از یک فرآیند خشک و یکنواخت به یک تجربه گروهی و پرانرژی تبدیل کند. ما باور داریم که آموزش زمانی مؤثر است که همراه با اشتیاق و مشارکت باشد.
+                </p>
+                
+                <div class="highlight-box">
+                    <p>دانش‌لیگ را یک دانش‌آموز مثل شما ساخت؛ چون می‌دانیم آموزش نباید در محیطی سرد و رسمی اتفاق بیفتد!</p>
+                </div>
+                
+                <p class="mission-text">
+                    اینجا قرار است مفاهیم درسی از طریق تعامل، رقابت سالم و کار گروهی به شکلی ماندگار و لذت‌بخش آموخته شوند. ما در حال ساختن جامعه‌ای از یادگیرندگان مشتاق هستیم که هر روز به رشد یکدیگر کمک می‌کنند.
+                </p>
             </div>
             
-            <div class="feature-card">
-                <h3>ساخته شده توسط یک دانش‌آموز</h3>
-                <p>می‌دانم دقیقاً چه چیزی به درد شما می‌خورد، چون خودم هم در همین موقعیت هستم.</p>
+            <div class="vision-section">
+                <h2>چشم‌انداز ما</h2>
+                <p class="vision-text">
+                    این فقط شروع راه است! دانش‌لیگ روزبه‌روز بزرگ‌تر خواهد شد و امکانات جدیدی برای بهبود تجربه یادگیری شما اضافه خواهد کرد. ما می‌خواهیم به یک خانواده واقعی برای همه دانش‌آموزان تبدیل شویم - جایی که هر کسی می‌تواند هم یاد بگیرد و هم آموزش دهد.
+                </p>
+                <p class="vision-text">
+                    آینده آموزش در دستان ماست و ما متعهدیم آن را شگفت‌انگیزتر از همیشه بسازیم. شما هم می‌توانید بخشی از این تحول باشید!
+                </p>
             </div>
         </div>
         
-        <div class="cta">
-            <h2>همراه ما باشید</h2>
-            <p>من اینجا هستم تا به هر سوالی جواب بدم.</p>
-            <a href="#" class="btn">ثبت‌نام در لیگ جدید</a>
-            <a href="#" class="btn btn-secondary">پرسش و پاسخ</a>
-            <a href="#" class="btn">تماس با پشتیبانی</a>
+        <div class="cta-section">
+            <a href="/" class="cta-button">بازگشت</a>
         </div>
-        
-        <footer>
-            <p>نظر شما برای بهبود دانش‌لیگ چیست؟ 😊</p>
-            <p>اگر دوست دارید بخش‌های دیگری مثل معرفی تیم‌های برتر یا گالری فعالیت‌ها اضافه شود، حتماً بگویید!</p>
-        </footer>
-        
     </div>
-    <<script>
-        window.addEventListener('scroll', function() {
-            const navbar = document.getElementById('navbar');
-            if (window.scrollY > 50) {
-                navbar.classList.add('scrolled');
-            } else {
-                navbar.classList.remove('scrolled');
-            }
-        });
-        
-        // اسکریپت برای منوی همبرگری در موبایل
-        document.getElementById('menuToggle').addEventListener('click', function() {
-            document.getElementById('navLinks').classList.toggle('active');
-        });
-        </script>
+    
+    <footer>
+       <div class="footer-bottom">
+      <p class="copyright">
+        Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | 
+        This WebSite is made with HEART by 
+        <span>HOSSEIN MOKHTARY</span>
+      </p>
+    </div>
+    </footer>
 </body>
 </html>
