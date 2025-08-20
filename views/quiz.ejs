@@ -1,10 +1,10 @@
-
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 
 <head>
     <meta charset="UTF-8">
-    <title>کوییز <%= quiz.title %></title>
+    <title>کوییز <%= quiz.title %>
+    </title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
@@ -12,7 +12,7 @@
         onload="renderMathInElement(document.body);"></script>
 
 
-        <style>
+    <style>
         @font-face {
             font-family: 'BN';
             src: url('../font/Vazir-Medium.woff2') format('woff2');
@@ -272,13 +272,61 @@
             color: #ff4757;
             animation: pulse 0.5s infinite;
         }
-    
-        </style>
+
+        /* تغییرات برای رسپانسیو */
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+
+            .app {
+                padding: 20px;
+            }
+
+            .app h1 {
+                font-size: 24px;
+                padding-bottom: 15px;
+            }
+
+            .quiz h2 {
+                font-size: 18px;
+            }
+
+            .btn-box {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .btn,
+            #next-btn,
+            .next-btn {
+                width: 100%;
+                font-size: 14px;
+                padding: 10px;
+            }
+
+            .chart-container {
+                width: 200px;
+                height: 200px;
+            }
+
+            .score-display {
+                font-size: 20px;
+            }
+
+            .explanation {
+                font-size: 14px;
+                padding: 10px;
+            }
+        }
+    </style>
 </head>
 
 <body>
     <div class="app">
-        <h1><%= quiz.title %></h1>
+        <h1>
+            <%= quiz.title %>
+        </h1>
         <div class="quiz">
             <div id="question-container"></div>
             <div id="result-container" style="display:none;"></div>
