@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>کوییز ریاضی نهم</title>
+    <style>
+@font-face {
+    font-family: 'BN';
+    src: url('../font/Vazir-Medium.woff2') format('woff2');
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: BN;
+}
+
+body {
+    background: #0a192f;
+    color: #e6f1ff;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.app {
+    background: #172a45;
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    border-radius: 16px;
+    padding: 30px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+}
+
+.app:hover {
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+}
+
+.app h1 {
+    font-size: 28px;
+    color: #64ffda;
+    font-weight: 600;
+    border-bottom: 2px solid #64ffda;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.quiz {
+    padding: 20px 0;
+}
+
+.quiz h2 {
+    font-size: 20px;
+    color: #ccd6f6;
+    font-weight: 600;
+    margin-bottom: 20px;
+    line-height: 1.5;
+}
+
+.btn-box {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.btn {
+    background: rgba(100, 255, 218, 0.1);
+    color: #e6f1ff;
+    font-weight: 500;
+    width: 100%;
+    border: 2px solid #1e90ff;
+    padding: 12px 20px;
+    margin: 8px 0;
+    text-align: right;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.btn:hover:not([disabled]) {
+    background: rgba(30, 144, 255, 0.2);
+    transform: translateY(-2px);
+}
+
+.btn:disabled {
+    cursor: no-drop;
+    opacity: 0.7;
+}
+
+#next-btn, .next-btn {
+    background: linear-gradient(135deg, #1e90ff, #64ffda);
+    color: #0a192f;
+    font-weight: 600;
+    width: 48%;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    text-align: center;
+}
+
+#next-btn:hover, .next-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(30, 144, 255, 0.4);
+}
+
+#next-btn {
+    display: none;
+}
+
+.correct {
+    background: rgba(46, 213, 115, 0.2);
+    border-color: #2ed573;
+    color: #2ed573;
+}
+
+.inCorrect {
+    background: rgba(255, 71, 87, 0.2);
+    border-color: #ff4757;
+    color: #ff4757;
+}
+
+.green {
+    margin-top: 15px;
+    color: #64ffda;
+    font-size: 18px;
+    font-weight: 600;
+    text-align: center;
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+.score-display {
+    font-size: 24px;
+    color: #64ffda;
+    text-align: center;
+    margin-bottom: 20px;
+    animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.explanation {
+    background: rgba(23, 42, 69, 0.8);
+    border-left: 3px solid #64ffda;
+    padding: 15px;
+    margin-top: 20px;
+    border-radius: 0 8px 8px 0;
+    display: none;
+    animation: slideIn 0.3s ease;
+}
+
+@keyframes slideIn {
+    from { opacity: 0; transform: translateX(20px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+    </style>
+</head>
+<body>
+    <div class="app">
+        <h1>کوییز ریاضی نهم</h1>
+        <div class="quiz">
+            <h2 id="question">گزینه درست را انتخاب کنید</h2>
+            <div id="answer-buttons"></div>
+            <div id="explanation" class="explanation"></div>
+            <div class="btn-box">
+                <button id="next-btn">بعدی</button>
+                <a class="next-btn" href="/">بازگشت به خانه</a>
+            </div>
+        </div>
+    </div>
+    <script>
+const questions = [
+   {
+        question: "حاصل عبارت (-4) × (5 - 7) کدام است؟",
+        answers: [
+            {text: '-8', correct: false},
+            {text: '8', correct: true, explanation: 'ابتدا پرانتز را حل می‌کنیم: (5-7)=-2 سپس (-4)×(-2)=8'},
+            {text: '-12', correct: false},
+            {text: '12', correct: false}
+        ]
+    },
+    {
+        question: "کدام گزینه معادل عدد گویا 0.625 است؟",
+        answers: [
+            {text: '3/8', correct: false},
+            {text: '5/8', correct: true},
+            {text: '2/5', correct: false},
+            {text: '7/12', correct: false}
+        ]
+    },
+    {
+        question: "حاصل جمع عددهای -3 و 5 و -7 کدام است؟",
+        answers: [
+            {text: '-5', correct: true, explanation: '-3 + 5 = 2 سپس 2 + (-7) = -5'},
+            {text: '5', correct: false},
+            {text: '15', correct: false},
+            {text: '-15', correct: false}
+        ]
+    },
+    {
+        question: "کدام گزینه نشان‌دهنده‌ی عددی بین 1/2 و 3/4 است؟",
+        answers: [
+            {text: '0.4', correct: false},
+            {text: '0.6', correct: true, explanation: '1/2=0.5 و 3/4=0.75 پس 0.6 بین این دو عدد قرار دارد'},
+            {text: '0.8', correct: false},
+            {text: '0.3', correct: false}
+        ]
+    },
+    {
+        question: "اگر a = -2 و b = 3 باشد، مقدار عبارت 2a - b چند است؟",
+        answers: [
+            {text: '-7', correct: true, explanation: '2×(-2) - 3 = -4 - 3 = -7'},
+            {text: '-1', correct: false},
+            {text: '1', correct: false},
+            {text: '7', correct: false}
+        ]
+    }
+];
+
+const questionElement = document.getElementById('question');
+const answerButtons = document.getElementById('answer-buttons');
+const nextButton = document.getElementById('next-btn');
+const explanationElement = document.getElementById('explanation');
+
+let currentQuestionIndex = 0;
+let score = 0;
+
+function startQuiz() {
+    currentQuestionIndex = 0;
+    score = 0;
+    nextButton.innerHTML = "بعدی";
+    showQuestion();
+}
+
+function showQuestion() {
+    resetState();
+    let currentQuestion = questions[currentQuestionIndex];
+    let questionNo = currentQuestionIndex + 1;
+    questionElement.innerHTML = questionNo + ". " + currentQuestion.question;
+
+    currentQuestion.answers.forEach(answer => {
+        const button = document.createElement('button');
+        button.innerHTML = answer.text;
+        button.classList.add('btn');
+        answerButtons.appendChild(button);
+        if (answer.correct) {
+            button.dataset.correct = answer.correct;
+        }
+        button.addEventListener('click', () => selectAnswer(answer, button));
+    });
+}
+
+function resetState() {
+    nextButton.style.display = 'none';
+    explanationElement.style.display = 'none';
+    explanationElement.innerHTML = '';
+    while (answerButtons.firstChild) {
+        answerButtons.removeChild(answerButtons.firstChild);
+    }
+}
+
+function selectAnswer(answer, selectedBtn) {
+    const isCorrect = answer.correct;
+    
+    if (isCorrect) {
+        selectedBtn.classList.add('correct');
+        score++;
+    } else {
+        selectedBtn.classList.add('inCorrect');
+    }
+
+    // نمایش توضیحات اگر وجود داشته باشد
+    if (answer.explanation) {
+        explanationElement.innerHTML = `<strong>توضیح:</strong> ${answer.explanation}`;
+        explanationElement.style.display = 'block';
+    } else if (isCorrect) {
+        // اگر جواب صحیح است اما توضیحی ندارد، توضیح عمومی نمایش داده شود
+        explanationElement.innerHTML = '<strong>تبریک! پاسخ شما صحیح است.</strong>';
+        explanationElement.style.display = 'block';
+    }
+
+    // نمایش جواب صحیح
+    Array.from(answerButtons.children).forEach(button => {
+        if (button.dataset.correct === 'true') {
+            button.classList.add('correct');
+        }
+        button.disabled = true;
+    });
+    
+    nextButton.style.display = 'block';
+}
+
+function showScore() {
+    resetState();
+    questionElement.innerHTML = `<div class="score-display">امتیاز شما: ${score} از ${questions.length}</div>`;
+    nextButton.innerHTML = 'شروع مجدد';
+    nextButton.style.display = 'block';
+    
+    if (score === questions.length) {
+        const p = document.createElement('p');
+        p.innerHTML = "عالیههه!!! شما همه سوالات را درست پاسخ دادید! 👏";
+        p.classList.add('green');
+        questionElement.appendChild(p);
+    }
+}
+
+function handleNextButton() {
+    currentQuestionIndex++;
+    if (currentQuestionIndex < questions.length) {
+        showQuestion();
+    } else {
+        showScore();
+    }
+}
+
+nextButton.addEventListener('click', () => {
+    if (currentQuestionIndex < questions.length) {
+        handleNextButton();
+    } else {
+        startQuiz();
+    }
+});
+
+// شروع کوییز
+startQuiz();
+    </script>
+</body>
+</html>

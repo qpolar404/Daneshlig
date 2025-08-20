@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ریاضی هشتم - فصل‌ها</title>
+  
+        <style>
+@font-face {
+    font-family: 'Vazir';
+    src: url('Vazir.woff2') format('woff2');
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Vazir', sans-serif;
+}
+
+body {
+    background: linear-gradient(135deg, #0a192f, #172a45);
+    color: #e6f1ff;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 40px;
+    animation: fadeIn 1s ease;
+}
+
+.header h1 {
+    font-size: 2.5rem;
+    color: #64ffda;
+    margin-top: 50px;
+}
+
+.header p {
+    font-size: 1.1rem;
+    color: #ccd6f6;
+    opacity: 0.9;
+}
+
+.chapters-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 25px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.chapter-card {
+    background: rgba(23, 42, 69, 0.8);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+    border: 1px solid rgba(100, 255, 218, 0.1);
+}
+
+.chapter-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+    border-color: rgba(100, 255, 218, 0.3);
+}
+
+.chapter-image {
+    height: 180px;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+}
+
+.chapter-image::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(to bottom, transparent, rgba(10, 25, 47, 0.9));
+}
+
+.chapter-number {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    background: rgba(100, 255, 218, 0.2);
+    color: #64ffda;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    border: 2px solid #64ffda;
+    z-index: 1;
+}
+
+.chapter-content {
+    padding: 20px;
+}
+
+.chapter-content h2 {
+    color: #64ffda;
+    margin-bottom: 10px;
+    font-size: 1.4rem;
+}
+
+.chapter-content p {
+    color: #ccd6f6;
+    margin-bottom: 20px;
+    line-height: 1.6;
+}
+
+.quiz-btn {
+    display: inline-block;
+    background: linear-gradient(135deg, #1e90ff, #64ffda);
+    color: #0a192f;
+    padding: 10px 20px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    text-align: center;
+}
+
+.quiz-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(30, 144, 255, 0.4);
+}
+
+.footer {
+    text-align: center;
+    margin-top: 50px;
+    color: #8892b0;
+    font-size: 0.9rem;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 768px) {
+    .chapters-container {
+        grid-template-columns: 1fr;
+    }
+    
+    .header h1 {
+        font-size: 2rem;
+    }
+}
+    </style>
+       <%- include('partials/head') %>
+</head>
+<body>
+    <nav class="navbar" id="navbar" dir="ltr">
+
+        <%- include('partials/nav') %>
+
+    </nav>
+    <div class="header">
+        <h1>ریاضی پایه هشتم</h1>
+        <p>انتخاب فصل مورد نظر برای شروع یادگیری</p>
+    </div>
+
+    <div class="chapters-container">
+        <!-- فصل 1 -->
+        <div class="chapter-card">
+            <div class="chapter-image" style="background-image: url('https://source.unsplash.com/random/600x400/?numbers,integers');">
+                <span class="chapter-number">۱</span>
+            </div>
+            <div class="chapter-content">
+                <h2>عددهای صحیح و گویا</h2>
+                <p>مفاهیم و عملیات مربوط به عددهای صحیح و گویا شامل کسرها و اعشار</p>
+                <a  class="quiz-btn" href="/quizRS">شروع کوییز فصل</a>
+            </div>
+        </div>
+
+        <!-- فصل 2 -->
+        <div class="chapter-card">
+            <div class="chapter-image" style="background-image: url('https://source.unsplash.com/random/600x400/?prime,numbers');">
+                <span class="chapter-number">۲</span>
+            </div>
+            <div class="chapter-content">
+                <h2>عددهای اول</h2>
+                <p>عددهای اول، روش غربال و مفاهیم مرتبط با اعداد اول</p>
+                <button onclick="startChapterQuiz(2)" class="quiz-btn">شروع کوییز فصل</button>
+            </div>
+        </div>
+
+        <!-- فصل 3 -->
+        <div class="chapter-card">
+            <div class="chapter-image" style="background-image: url('https://source.unsplash.com/random/600x400/?polygon,geometry');">
+                <span class="chapter-number">۳</span>
+            </div>
+            <div class="chapter-content">
+                <h2>چندضلعی‌ها</h2>
+                <p>انواع چندضلعی‌ها، زوایای داخلی و خارجی و تقارن در اشکال هندسی</p>
+                <button onclick="startChapterQuiz(3)" class="quiz-btn">شروع کوییز فصل</button>
+            </div>
+        </div>
+
+        <!-- فصل 4 -->
+        <div class="chapter-card">
+            <div class="chapter-image" style="background-image: url('https://source.unsplash.com/random/600x400/?algebra,equation');">
+                <span class="chapter-number">۴</span>
+            </div>
+            <div class="chapter-content">
+                <h2>جبر و معادله</h2>
+                <p>عبارت‌های جبری، ساده کردن آن‌ها و حل معادلات</p>
+                <button onclick="startChapterQuiz(4)" class="quiz-btn">شروع کوییز فصل</button>
+            </div>
+        </div>
+
+        <!-- فصل 5 -->
+        <div class="chapter-card">
+            <div class="chapter-image" style="background-image: url('https://source.unsplash.com/random/600x400/?vector,coordinates');">
+                <span class="chapter-number">۵</span>
+            </div>
+            <div class="chapter-content">
+                <h2>بردار و مختصات</h2>
+                <p>مفاهیم بردار، جمع بردارها و مختصات نقاط در صفحه</p>
+                <button onclick="startChapterQuiz(5)" class="quiz-btn">شروع کوییز فصل</button>
+            </div>
+        </div>
+
+        <!-- فصل 6 -->
+        <div class="chapter-card">
+            <div class="chapter-image" style="background-image: url('https://source.unsplash.com/random/600x400/?triangle,geometry');">
+                <span class="chapter-number">۶</span>
+            </div>
+            <div class="chapter-content">
+                <h2>مثلث</h2>
+                <p>انواع مثلث، روابط بین اضلاع و زوایا و ترسیم‌های هندسی</p>
+                <button onclick="startChapterQuiz(6)" class="quiz-btn">شروع کوییز فصل</button>
+            </div>
+        </div>
+
+        <!-- فصل 7 -->
+        <div class="chapter-card">
+            <div class="chapter-image" style="background-image: url('https://source.unsplash.com/random/600x400/?power,root');">
+                <span class="chapter-number">۷</span>
+            </div>
+            <div class="chapter-content">
+                <h2>توان و جذر</h2>
+                <p>مفهوم توان، جذر و قوانین مربوط به آن‌ها</p>
+                <button onclick="startChapterQuiz(7)" class="quiz-btn">شروع کوییز فصل</button>
+            </div>
+        </div>
+
+        <!-- فصل 8 -->
+        <div class="chapter-card">
+            <div class="chapter-image" style="background-image: url('https://source.unsplash.com/random/600x400/?statistics,probability');">
+                <span class="chapter-number">۸</span>
+            </div>
+            <div class="chapter-content">
+                <h2>آمار و احتمال</h2>
+                <p>جمع‌آوری داده‌ها، نمایش آن‌ها و محاسبه احتمال رخدادها</p>
+                <button onclick="startChapterQuiz(8)" class="quiz-btn">شروع کوییز فصل</button>
+            </div>
+        </div>
+
+        <!-- فصل 9 -->
+        <div class="chapter-card">
+            <div class="chapter-image" style="background-image: url('https://source.unsplash.com/random/600x400/?circle,geometry');">
+                <span class="chapter-number">۹</span>
+            </div>
+            <div class="chapter-content">
+                <h2>دایره</h2>
+                <p>مفاهیم دایره، اجزای آن و روابط بین آن‌ها</p>
+                <button onclick="startChapterQuiz(9)" class="quiz-btn">شروع کوییز فصل</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+         <p>ساخته شده با ❤️ برای آینده‌سازان ایران</p>
+    </div>
+
+ 
+    
+</body>
+</html>

@@ -1,184 +1,102 @@
 const express = require('express');
 const path = require('path');
-const mongoose = require('mongoose');
-const Book = require('./models/lessons');
-const Teach = require('./models/teaches');
-const app = express();
+const session = require('express-session');
 const cors = require('cors');
+const connectDB = require('./config/db');
+const mongoose = require('mongoose'); // اضافه کردم برای health check
 
-// 1. تنظیمات پایه
+// Route files
+const authRoutes = require('./routes/authRoutes');
+const userRoutes = require('./routes/userRoutes');
+const lessonRoutes = require('./routes/lessonRoutes');
+const pagesRoutes = require('./routes/pagesRoutes');
+const quizRoutes = require('./routes/quizRoutes');         // API کوییز
+const quizPageRoutes = require('./routes/quizRoutes'); // صفحه کوییز (render)
+
+const Teach = require('./models/teaches');
+const Quiz = require('./models/quizzes');
+const { result } = require('lodash');
+// ایجاد اپلیکیشن
+const app = express();
+
+// اتصال به دیتابیس
+connectDB();
+
+// تنظیمات view engine
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
-app.use(express.static('public'));
 
+// Middlewareها
 app.use(cors());
+app.use(express.static('public'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(session({
+  secret: 'your-secret-key-123',
+  resave: false,
+  saveUninitialized: true,
+  cookie: { maxAge: 24 * 60 * 60 * 1000 }
+}));
 
-// 2. اتصال به دیتابیس
-const dbURI = 'mongodb+srv://amir:test1234@qpcodecompany.8gljb.mongodb.net/DaneshLig?retryWrites=true&w=majority&appName=qPCodeCompany';
+// مونت کردن روت‌ها
+app.use('/', pagesRoutes);
+app.use('/', authRoutes);
+app.use('/', userRoutes);
+app.use('/', lessonRoutes);
+
+app.use('/quiz', quizPageRoutes);      // روت صفحه کوییز: GET /quiz/:id
+app.use('/api/quizzes', quizRoutes);   // API کوییز
+
+// تست سلامت سرور و دیتابیس
+app.get('/health', (req, res) => {
+  res.json({ status: 'OK', dbState: mongoose.connection.readyState });
+});
+
+// استارت سرور
 const PORT = process.env.PORT || 3000;
-
-mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
-    .then(() => app.listen(PORT, () => console.log(`Server is running on port ${PORT}`)))
-    .catch(err => console.log('MongoDB connection error:', err));
-
-
-
-
-app.get('/teaches/save-science-8th', (req, res) => {
-   const teach = new Teach({
-     "grade": "هشتم",
-     "bookName": "علوم",
-     "lessonName": "فصل اول",
-     "sections": [
-       {
-         "title": "تعریف مخلوط",
-         "content": "مخلوط به ماده‌ای گفته می‌شود که از ترکیب دو یا چند ماده خالص به وجود آمده باشد.\n\nانواع مخلوط:\n1. مخلوط همگن (محلول): اجزاء به صورت یکنواخت پراکنده شده‌اند مثل آب نمک\n2. مخلوط ناهمگن: اجزاء به صورت غیریکنواخت پراکنده شده‌اند مثل سالاد",
-         "order": 1
-       },
-       {
-         "title": "اجزای تشکیل دهنده مخلوط",
-         "content": "1. فاز مایع: مانند آب در آب نمک\n2. فاز جامد: مانند نمک در آب نمک\n3. فاز گاز: مانند هوا در نوشابه\n\nنکته: در مخلوط همگن فقط یک فاز قابل مشاهده است.",
-         "order": 2
-       },
-       {
-         "title": "روش‌های جداسازی مخلوط‌ها",
-         "content": "1. صاف کردن: برای جدا کردن مواد جامد از مایع\n2. تبخیر: برای جدا کردن مواد حل شده در مایعات\n3. تقطیر: برای جدا کردن مایعات مخلوط\n4. سانتریفیوژ: برای جدا کردن مواد با چگالی مختلف\n5. کروماتوگرافی: برای جدا کردن مواد حل شده",
-         "order": 3
-       },
-       {
-         "title": "محلول‌ها و غلظت",
-         "content": "محلول = حلال + حل شونده\n\nغلظت مقدار ماده حل شده در مقدار معینی از حلال است.\n\nواحدهای غلظت:\n- گرم بر لیتر\n- درصد جرمی\n- مولاریته",
-         "order": 4
-       },
-       {
-         "title": "کاربردهای عملی",
-         "content": "1. تصفیه آب: جداسازی ناخالصی‌ها از آب\n2. صنایع غذایی: تولید نوشیدنی‌ها\n3. پزشکی: تولید داروها\n4. محیط زیست: بازیافت مواد\n5. صنعت نفت: پالایش نفت خام",
-         "order": 5
-       }
-     ]
-   });
-
-   teach.save()
-     .then(savedDoc => res.json({
-       success: true,
-       message: "فصل اول علوم هشتم با موفقیت ذخیره شد",
-       data: savedDoc
-     }))
-     .catch(err => res.status(500).json({
-       success: false,
-       message: "خطا در ذخیره اطلاعات",
-       error: err.message
-     }));
+app.listen(PORT, () => {
+  console.log(`server is running on Port:${PORT} ✓`);
+  console.log(`health Link: http://localhost:${PORT}/health`);
 });
-// 3. مسیرهای اصلی
-app.get('/', (req, res) => res.render('index2', { title: 'صفحه اصلی' }));
-app.get('/anoutUs', (req, res) => res.render('anoutUs', { title: 'درباره ما' }));
-app.get('/haftom', (req, res) => res.render('haftom', { title: 'هفتم' }));
-app.get('/hashtom', (req, res) => res.render('hashtom', { title: 'هشتم' }));
-app.get('/nohom', (req, res) => res.render('nohom', { title: 'نهم' }));
-app.get('/majeraJoyi', (req, res) => res.render('majeraJoyi', { title: 'ماجراجویی' }));
-app.get('/login', (req, res) => res.render('login', { title: 'ورود' }));
-app.get('/BeZoudy', (req, res) => res.render('BeZoudy', { title: 'به زودی' }));
-app.get('/quizShow', (req, res) => res.render('quizShow', { title: 'کوییز شو' }));
-app.get('/quizRNohom', (req, res) => res.render('quizRNohom', { title: 'کوییز ریاضی' }));
-app.get('/rahnamayi', (req, res) => res.render('rahnamayi', { title: 'راهنمایی استفاده از سایت' }));
 
-// مسیرهای API
-app.post('/sendid', async (req, res) => {
-    try {
-        const { bookname } = req.body;
-        const lesson = await Book.findOne({ nameId: bookname });
-        
-        if (!lesson) {
-            return res.status(404).json({ error: 'درس پیدا نشد!' });
-        }
 
-        res.status(200).json({
-            redirectUrl: `/lesson/${lesson.nameId}`,
-            lessonData: lesson
-        });
-    } catch (err) {
-        console.error('Error in /sendid:', err);
-        res.status(500).json({ error: 'خطای سرور' });
+app.get('/lessonCreat', (req,res)=>{
+const teach=new Teach(
+  {
+  "grade": "هفتم",
+  "bookName": "ریاضی",
+  "lessonName": "درس پنجم",
+  "sections": [
+    {
+      "title": "بخش اول: شمارنده‌ها",
+      "content": "<p>شمارنده‌های یک عدد، اعدادی هستند که آن عدد بر آن‌ها بخش‌پذیر است.</p><p><strong>مثال:</strong> شمارنده‌های 12: 1، 2، 3، 4، 6، 12</p><p>هر عدد حداقل دو شمارنده دارد: 1 و خودش.</p><p>👉 این پایهٔ همه مفاهیم بعدی دربارهٔ اول بودن و مرکب بودن اعداد است.</p>",
+      "order": 1
+    },
+    {
+      "title": "بخش دوم: اعداد اول و مرکب",
+      "content": "<ul><li><strong>عدد اول:</strong> بزرگ‌تر از 1 و دقیقاً دو شمارنده دارد (1 و خودش).<br><strong>مثال:</strong> 2، 3، 5، 7، 11</li><li><strong>عدد مرکب:</strong> بزرگ‌تر از 1 و بیش از دو شمارنده دارد.<br><strong>مثال:</strong> 4، 6، 8، 9، 12</li></ul><p>👉 اینجا یاد می‌گیری کدام عدد ساده و بنیادی است و کدام عدد چند بخش دارد.</p>",
+      "order": 2
+    },
+    {
+      "title": "بخش سوم: روش تعیین اعداد اول",
+      "content": "<p>برای فهمیدن اول بودن یک عدد:</p><ul><li>عدد را بر اعداد کوچکتر از خودش امتحان کن (به جز 1).</li><li>اگر هیچ‌کدام بخش‌پذیر نبود → عدد اول است.</li></ul><p><strong>مثال:</strong> 13 → بخش‌پذیری بر 2، 3، 4، 5، 6؟ نه → پس 13 عدد اول است.</p><p><strong>مثال:</strong> 15 → بخش‌پذیری بر 3 → بله → پس 15 مرکب است.</p><p>👉 اینجا پایهٔ استدلال ریاضی را هم یاد می‌گیری: چطور با دلیل ثابت می‌کنیم عدد اول یا مرکب است.</p>",
+      "order": 3
+    },
+    {
+      "title": "بخش چهارم: قواعد و نکات مهم",
+      "content": "<ul><li>عدد 1 عدد اول نیست.</li><li>عدد 2 تنها عدد اول زوج است.</li><li>همهٔ اعداد اول بزرگ‌تر از 2 فرد هستند.</li></ul><p>👉 این نکات مثل قوانین بازی هستند که باید بدانید تا در حل تمرین‌ها اشتباه نکنید.</p>",
+      "order": 4
+    },
+    {
+      "title": "بخش پنجم: تمرین و کاربرد",
+      "content": "<ul><li>شمارنده‌های عدد 18 را پیدا کن → 1، 2، 3، 6، 9، 18</li><li>مشخص کن کدام اعداد اول هستند: 9، 11، 15، 17 → 11 و 17 اول هستند</li><li>یک عدد مرکب و یک عدد اول بین 20 و 30 → مرکب: 24، اول: 23</li></ul><p>👉 این بخش کمک می‌کند مفاهیم را در ذهن تثبیت کنی و خودت استدلال کنی.</p>",
+      "order": 5
     }
-});
+  ]
+}
 
-app.get('/lesson/:id', async (req, res) => {
-    try {
-        const lesson = await Book.findOne({ nameId: req.params.id });
-        if (!lesson) {
-            return res.status(404).render('404', { title: 'درس پیدا نشد!' });
-        }
-        res.render('lessonPage', { 
-            title: lesson.subject,
-            lesson: lesson 
-        });
-    } catch (err) {
-        console.error('Error in /lesson/:id:', err);
-        res.status(500).render('500', { title: 'خطای سرور' });
-    }
-});
+)
 
-app.post('/api/lessons', async (req, res) => {
-    const { grade, subject, title } = req.body;
-    
-    try {
-        // جستجو در دیتابیس برای یافتن سند کامل
-        const lessonDetails = await Teach.findOne({
-            grade: grade,
-            bookName: subject,
-            lessonName: title
-        }).lean(); // استفاده از lean() برای دریافت آبجکت ساده
+teach.save().then(result => res.send(result)).catch(err => res.status(err))
 
-        if (!lessonDetails) {
-            return res.status(404).json({
-                success: false,
-                message: "درس مورد نظر یافت نشد"
-            });
-        }
-
-        // ارسال اطلاعات کامل به همراه URL صفحه جدید
-        res.status(200).json({
-            success: true,
-            redirectUrl: `/lesson-details/${encodeURIComponent(grade)}/${encodeURIComponent(subject)}/${encodeURIComponent(title)}`,
-            lessonData: lessonDetails
-        });
-
-    } catch (error) {
-        console.error("خطا در جستجوی درس:", error);
-        res.status(500).json({
-            success: false,
-            message: "خطای سرور در پردازش درخواست"
-        });
-    }
-});
-app.get('/lesson-details/:grade/:subject/:title', async (req, res) => {
-    try {
-        const { grade, subject, title } = req.params;
-        
-        // دوباره جستجو برای اطمینان (یا می‌توانید از session/state استفاده کنید)
-        const lesson = await Teach.findOne({
-            grade: decodeURIComponent(grade),
-            bookName: decodeURIComponent(subject),
-            lessonName: decodeURIComponent(title)
-        });
-
-        if (!lesson) {
-            return res.status(404).render('404', { title: 'درس پیدا نشد!' });
-        }
-
-        // رندر صفحه با تمام اطلاعات درس
-        res.render('lessonDetails', {
-            title: `جزئیات ${lesson.lessonName}`,
-            lesson: lesson
-        });
-
-    } catch (error) {
-        console.error("خطا در نمایش جزئیات درس:", error);
-        res.status(500).render('500', { title: 'خطای سرور' });
-    }
-});
-// 5. صفحه 404
-app.use((req, res) => res.status(404).render('404', { title: 'صفحه پیدا نشد' }));
+})

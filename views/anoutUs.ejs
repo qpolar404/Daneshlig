@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>درباره دانش‌لیگ | انقلابی در یادگیری</title>
-   
+
     <style>
         :root {
             --primary-dark: #0a192f;
@@ -13,7 +14,7 @@
             --text-primary: #ccd6f6;
             --text-secondary: #8892b0;
         }
-        
+
         @font-face {
             font-family: 'BN';
             src: url('../font/Vazir-Medium.woff2') format('woff2');
@@ -25,25 +26,26 @@
             box-sizing: border-box;
             font-family: BN;
         }
+
         body {
-            background-color: var(--primary-dark);
+            background-color: var(--primary-dark) !important;
             color: var(--text-primary);
             line-height: 1.6;
         }
-        
+
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 20px;
         }
-        
+
         header {
             padding: 80px 0 40px;
             text-align: center;
             position: relative;
             overflow: hidden;
         }
-        
+
         header::before {
             content: "";
             position: absolute;
@@ -54,7 +56,7 @@
             background: radial-gradient(circle, rgba(100, 255, 218, 0.1) 0%, rgba(100, 255, 218, 0) 70%);
             z-index: -1;
         }
-        
+
         header::after {
             content: "";
             position: absolute;
@@ -65,7 +67,7 @@
             background: radial-gradient(circle, rgba(100, 255, 218, 0.05) 0%, rgba(100, 255, 218, 0) 70%);
             z-index: -1;
         }
-        
+
         h1 {
             font-size: 3.5rem;
             margin-bottom: 20px;
@@ -75,7 +77,7 @@
             position: relative;
             display: inline-block;
         }
-        
+
         h1::after {
             content: "";
             position: absolute;
@@ -85,7 +87,7 @@
             height: 3px;
             background: linear-gradient(90deg, var(--accent-blue), #4facfe);
         }
-        
+
         .tagline {
             font-size: 1.5rem;
             color: var(--text-secondary);
@@ -94,14 +96,14 @@
             margin-left: auto;
             margin-right: auto;
         }
-        
+
         .main-content {
             display: flex;
             flex-wrap: wrap;
             gap: 40px;
             padding: 60px 0;
         }
-        
+
         .founder-section {
             flex: 1;
             min-width: 300px;
@@ -113,11 +115,11 @@
             overflow: hidden;
             transition: transform 0.3s ease;
         }
-        
+
         .founder-section:hover {
             transform: translateY(-10px);
         }
-        
+
         .founder-section::before {
             content: "";
             position: absolute;
@@ -127,7 +129,7 @@
             height: 5px;
             background: linear-gradient(90deg, var(--accent-blue), #4facfe);
         }
-        
+
         .founder-image {
             width: 150px;
             height: 150px;
@@ -138,29 +140,29 @@
             object-fit: cover;
             box-shadow: 0 5px 15px rgba(100, 255, 218, 0.3);
         }
-        
+
         .founder-title {
             text-align: center;
             margin-bottom: 20px;
         }
-        
+
         .founder-title h2 {
             font-size: 1.8rem;
             margin-bottom: 5px;
             color: var(--accent-blue);
         }
-        
+
         .founder-title p {
             color: var(--text-secondary);
             font-size: 1rem;
         }
-        
+
         .founder-bio {
             color: var(--text-secondary);
             margin-bottom: 20px;
             text-align: justify;
         }
-        
+
         .mission-section {
             flex: 2;
             min-width: 300px;
@@ -170,7 +172,7 @@
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
             position: relative;
         }
-        
+
         .mission-section h2 {
             font-size: 2rem;
             margin-bottom: 30px;
@@ -178,7 +180,7 @@
             position: relative;
             display: inline-block;
         }
-        
+
         .mission-section h2::after {
             content: "";
             position: absolute;
@@ -188,14 +190,14 @@
             height: 3px;
             background: linear-gradient(90deg, var(--accent-blue), #4facfe);
         }
-        
+
         .mission-text {
             margin-bottom: 30px;
             color: var(--text-secondary);
             font-size: 1.1rem;
             line-height: 1.8;
         }
-        
+
         .highlight-box {
             background: rgba(100, 255, 218, 0.1);
             border-left: 3px solid var(--accent-blue);
@@ -203,13 +205,13 @@
             margin: 30px 0;
             border-radius: 0 5px 5px 0;
         }
-        
+
         .highlight-box p {
             color: var(--text-primary);
             font-size: 1.2rem;
             font-style: italic;
         }
-        
+
         .vision-section {
             width: 100%;
             background: var(--primary-light);
@@ -220,7 +222,7 @@
             position: relative;
             overflow: hidden;
         }
-        
+
         .vision-section::before {
             content: "";
             position: absolute;
@@ -231,7 +233,7 @@
             background: radial-gradient(circle, rgba(100, 255, 218, 0.1) 0%, rgba(100, 255, 218, 0) 70%);
             z-index: 0;
         }
-        
+
         .vision-section h2 {
             font-size: 2rem;
             margin-bottom: 30px;
@@ -239,7 +241,7 @@
             position: relative;
             z-index: 1;
         }
-        
+
         .vision-text {
             color: var(--text-secondary);
             font-size: 1.1rem;
@@ -247,12 +249,12 @@
             position: relative;
             z-index: 1;
         }
-        
+
         .cta-section {
             text-align: center;
             padding: 60px 0;
         }
-        
+
         .cta-button {
             display: inline-block;
             padding: 15px 30px;
@@ -266,13 +268,13 @@
             position: relative;
             overflow: hidden;
         }
-        
+
         .cta-button:hover {
             background: rgba(100, 255, 218, 0.1);
             box-shadow: 0 0 20px rgba(100, 255, 218, 0.3);
             transform: translateY(-3px);
         }
-        
+
         .cta-button::before {
             content: "";
             position: absolute;
@@ -283,11 +285,11 @@
             background: linear-gradient(90deg, transparent, rgba(100, 255, 218, 0.2), transparent);
             transition: 0.5s;
         }
-        
+
         .cta-button:hover::before {
             left: 100%;
         }
-        
+
         footer {
             text-align: center;
             padding: 30px 0;
@@ -295,30 +297,36 @@
             font-size: 0.9rem;
             border-top: 1px solid rgba(100, 255, 218, 0.1);
         }
-        
+
         @media (max-width: 768px) {
             h1 {
                 font-size: 2.5rem;
             }
-            
+
             .tagline {
                 font-size: 1.2rem;
             }
-            
+
             .main-content {
                 flex-direction: column;
             }
         }
     </style>
-
+    <%- include('partials/head') %>
 </head>
-<body>
+
+<body class="best-body">
+    <nav class="navbar" id="navbar" dir="ltr">
+
+        <%- include('partials/nav') %>
+
+    </nav>
     <div class="container">
         <header>
             <h1>دانش‌لیگ</h1>
             <p class="tagline">یادگیری را هیجان‌انگیز کنید!</p>
         </header>
-        
+
         <div class="main-content">
             <div class="founder-section">
 
@@ -327,49 +335,54 @@
                     <p>بنیان‌گذار دانش‌لیگ</p>
                 </div>
                 <p class="founder-bio">
-                    "سلام! من حسین مختاری هستم، یک دانش‌آموز مثل شما. همیشه از اینکه بعضی از دوستانم در درس‌ها مشکل داشتند ناراحت می‌شدم. تا اینکه یک روز ایده‌ای به ذهنم رسید: چرا فضایی ایجاد نکنیم که درس خواندن هم مفید باشد هم لذت‌بخش؟"
+                    "سلام! من حسین مختاری هستم، یک دانش‌آموز مثل شما. همیشه از اینکه بعضی از دوستانم در درس‌ها مشکل
+                    داشتند ناراحت می‌شدم. تا اینکه یک روز ایده‌ای به ذهنم رسید: چرا فضایی ایجاد نکنیم که درس خواندن هم
+                    مفید باشد هم لذت‌بخش؟"
                 </p>
             </div>
-            
+
             <div class="mission-section">
                 <h2>ماموریت ما</h2>
                 <p class="mission-text">
-                    دانش‌لیگ متولد شد تا یادگیری را از یک فرآیند خشک و یکنواخت به یک تجربه گروهی و پرانرژی تبدیل کند. ما باور داریم که آموزش زمانی مؤثر است که همراه با اشتیاق و مشارکت باشد.
+                    دانش‌لیگ متولد شد تا یادگیری را از یک فرآیند خشک و یکنواخت به یک تجربه گروهی و پرانرژی تبدیل کند. ما
+                    باور داریم که آموزش زمانی مؤثر است که همراه با اشتیاق و مشارکت باشد.
                 </p>
-                
+
                 <div class="highlight-box">
-                    <p>دانش‌لیگ را یک دانش‌آموز مثل شما ساخت؛ چون می‌دانیم آموزش نباید در محیطی سرد و رسمی اتفاق بیفتد!</p>
+                    <p>دانش‌لیگ را یک دانش‌آموز مثل شما ساخت؛ چون می‌دانیم آموزش نباید در محیطی سرد و رسمی اتفاق بیفتد!
+                    </p>
                 </div>
-                
+
                 <p class="mission-text">
-                    اینجا قرار است مفاهیم درسی از طریق تعامل، رقابت سالم و کار گروهی به شکلی ماندگار و لذت‌بخش آموخته شوند. ما در حال ساختن جامعه‌ای از یادگیرندگان مشتاق هستیم که هر روز به رشد یکدیگر کمک می‌کنند.
+                    اینجا قرار است مفاهیم درسی از طریق تعامل، رقابت سالم و کار گروهی به شکلی ماندگار و لذت‌بخش آموخته
+                    شوند. ما در حال ساختن جامعه‌ای از یادگیرندگان مشتاق هستیم که هر روز به رشد یکدیگر کمک می‌کنند.
                 </p>
             </div>
-            
+
             <div class="vision-section">
                 <h2>چشم‌انداز ما</h2>
                 <p class="vision-text">
-                    این فقط شروع راه است! دانش‌لیگ روزبه‌روز بزرگ‌تر خواهد شد و امکانات جدیدی برای بهبود تجربه یادگیری شما اضافه خواهد کرد. ما می‌خواهیم به یک خانواده واقعی برای همه دانش‌آموزان تبدیل شویم - جایی که هر کسی می‌تواند هم یاد بگیرد و هم آموزش دهد.
+                    این فقط شروع راه است! دانش‌لیگ روزبه‌روز بزرگ‌تر خواهد شد و امکانات جدیدی برای بهبود تجربه یادگیری
+                    شما اضافه خواهد کرد. ما می‌خواهیم به یک خانواده واقعی برای همه دانش‌آموزان تبدیل شویم - جایی که هر
+                    کسی می‌تواند هم یاد بگیرد و هم آموزش دهد.
                 </p>
                 <p class="vision-text">
-                    آینده آموزش در دستان ماست و ما متعهدیم آن را شگفت‌انگیزتر از همیشه بسازیم. شما هم می‌توانید بخشی از این تحول باشید!
+                    آینده آموزش در دستان ماست و ما متعهدیم آن را شگفت‌انگیزتر از همیشه بسازیم. شما هم می‌توانید بخشی از
+                    این تحول باشید!
                 </p>
             </div>
         </div>
-        
+
         <div class="cta-section">
             <a href="/" class="cta-button">بازگشت</a>
         </div>
     </div>
-    
-    <footer>
-       <div class="footer-bottom">
-      <p class="copyright">
-        Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | 
-        This WebSite is made with HEART by 
-        <span>HOSSEIN MOKHTARY</span>
-      </p>
-    </div>
+
+    <footer class="footer">
+
+        <p>ساخته شده با ❤️ برای آینده‌سازان ایران</p>
+
     </footer>
 </body>
+
 </html>

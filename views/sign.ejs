@@ -3,272 +3,363 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ثبت‌نام | وبسایت شما</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>فرم ثبت نام</title>
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" rel="stylesheet">
     <style>
-        :root {
-            --primary-dark: #0a192f;
-            --primary-medium: #172a45;
-            --primary-light: #303f60;
-            --accent-color: #64ffda;
-            --text-primary: #e6f1ff;
-            --text-secondary: #8892b0;
-            --error-color: #ff6b6b;
-        }
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-        
         body {
-            background-color: var(--primary-dark);
-            color: var(--text-primary);
-            line-height: 1.6;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
             padding: 20px;
+            color: #333;
         }
         
-        .auth-container {
-            width: 100%;
+        .container {
             max-width: 500px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         }
         
-        .auth-card {
-            background-color: var(--primary-medium);
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-            padding: 2rem;
-        }
-        
-        .auth-header {
+        h1 {
             text-align: center;
-            margin-bottom: 2rem;
-        }
-        
-        .auth-title {
-            font-size: 1.8rem;
-            margin-bottom: 0.5rem;
-            color: var(--accent-color);
-        }
-        
-        .auth-subtitle {
-            color: var(--text-secondary);
-            font-size: 1rem;
+            color: #2c3e50;
+            margin-bottom: 30px;
         }
         
         .form-group {
-            margin-bottom: 1.5rem;
+            margin-bottom: 20px;
         }
         
-        .form-label {
+        label {
             display: block;
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-            margin-bottom: 0.5rem;
+            margin-bottom: 8px;
+            font-weight: 600;
         }
         
-        .form-control {
+        input {
             width: 100%;
-            padding: 0.8rem;
-            background-color: var(--primary-dark);
-            border: 1px solid var(--primary-light);
-            border-radius: 5px;
-            color: var(--text-primary);
-            font-size: 1rem;
-            transition: all 0.3s;
+            padding: 10px 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+            box-sizing: border-box;
         }
         
-        .form-control:focus {
+        input:focus {
             outline: none;
-            border-color: var(--accent-color);
-            box-shadow: 0 0 0 2px rgba(100, 255, 218, 0.2);
+            border-color: #3498db;
+            box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
         }
         
         .error-message {
-            color: var(--error-color);
-            font-size: 0.8rem;
-            margin-top: 0.3rem;
-            display: none;
+            color: #e74c3c;
+            font-size: 14px;
+            margin-top: 5px;
+            height: 20px;
         }
         
-        .auth-btn {
-            width: 100%;
-            padding: 0.8rem;
-            background-color: var(--accent-color);
-            color: var(--primary-dark);
+        .error-message.checking {
+            color: #f39c12;
+        }
+        
+        .error-message.available {
+            color: #27ae60;
+        }
+        
+        button {
+            background-color: #3498db;
+            color: white;
             border: none;
-            border-radius: 5px;
-            font-size: 1rem;
-            font-weight: bold;
+            padding: 12px 20px;
+            font-size: 16px;
+            border-radius: 4px;
             cursor: pointer;
-            transition: all 0.3s;
-            margin-top: 1rem;
+            width: 100%;
+            transition: background-color 0.3s;
         }
         
-        .auth-btn:hover {
-            background-color: transparent;
-            color: var(--accent-color);
-            outline: 1px solid var(--accent-color);
+        button:hover {
+            background-color: #2980b9;
         }
         
-        .auth-footer {
+        .form-footer {
             text-align: center;
-            margin-top: 1.5rem;
-            color: var(--text-secondary);
-            font-size: 0.9rem;
+            margin-top: 20px;
+            font-size: 14px;
         }
         
-        .auth-link {
-            color: var(--accent-color);
+        a {
+            color: #3498db;
             text-decoration: none;
-            transition: all 0.3s;
-        }
-        
-        .auth-link:hover {
-            text-decoration: underline;
-        }
-        
-        .password-strength {
-            height: 5px;
-            background-color: var(--primary-light);
-            margin-top: 0.5rem;
-            border-radius: 3px;
-            overflow: hidden;
-        }
-        
-        .strength-meter {
-            height: 100%;
-            width: 0;
-            background-color: var(--error-color);
-            transition: all 0.3s;
         }
     </style>
 </head>
 <body>
-    <div class="auth-container">
-        <div class="auth-card">
-            <div class="auth-header">
-                <h2 class="auth-title">ثبت‌نام در وبسایت</h2>
-                <p class="auth-subtitle">لطفاً اطلاعات خود را وارد کنید</p>
+    <div class="container">
+        <h1>ثبت نام</h1>
+        <form id="registrationForm">
+            <div class="form-group">
+                <label for="username">نام کاربری</label>
+                <input type="text" id="username" name="username" autocomplete="username">
+                <div id="usernameError" class="error-message"></div>
             </div>
-            <form id="signupForm" action="/signUp-person" method="post" enctype="application/x-www-form-urlencoded">
-                <div class="form-group">
-                    <label for="fullname" class="form-label">نام و نام خانوادگی</label>
-                    <input name="fullName" type="text" id="fullname" class="form-control" placeholder="نام و نام خانوادگی خود را وارد کنید">
-                    <div class="error-message" id="fullname-error">لطفاً نام و نام خانوادگی را وارد کنید</div>
-                </div>
-                
-                <div class="form-group">
-                    <label for="username" class="form-label">نام کاربری</label>
-                    <input name="username" type="text" id="username" class="form-control" placeholder="نام کاربری خود را انتخاب کنید">
-                    <div class="error-message" id="username-error">لطفاً نام کاربری را وارد کنید</div>
-                </div>
-                
-                <div class="form-group">
-                    <label for="phone" class="form-label">شماره تلفن</label>
-                    <input name="phoneNumber" type="tel" id="phone" class="form-control" placeholder="شماره تلفن خود را وارد کنید">
-                    <div class="error-message" id="phone-error">لطفاً شماره تلفن معتبر وارد کنید</div>
-                </div>
-                
-                <div class="form-group">
-                    <label for="city" class="form-label">نام شهر</label>
-                    <input name="city" type="text" id="city" class="form-control" placeholder="نام شهر خود را وارد کنید ">
-                    <div class="error-message" id="city-error">لطفا نام شهر خود را انتخاب کنید</div>
-                </div>
-
-                <div class="form-group">
-                    <label for="grade" class="form-label">پایه تحصیلی</label>
-                    <select  name="gear" id="grade" class="form-control">
-                        <option value="">-- انتخاب کنید --</option>
-                        <option value="7">پایه هفتم</option>
-                        <option value="8">پایه هشتم</option>
-                        <option value="9">پایه نهم</option>
-
-                    </select>
-                    <div class="error-message" id="grade-error">لطفاً پایه تحصیلی را انتخاب کنید</div>
-                </div>
-                
-                <div class="form-group">
-                    <label for="password" class="form-label">رمز عبور</label>
-                    <input  name="password" type="password" id="password" class="form-control" placeholder="رمز عبور خود را انتخاب کنید">
-                    <div class="error-message" id="password-error">لطفاً رمز عبور را وارد کنید</div>
-                    <div class="password-strength">
-                        <div class="strength-meter" id="strengthMeter"></div>
-                    </div>
-                </div>
-                
-              
-                
-                <button type="submit" class="auth-btn">
-                    <i class="fas fa-user-plus"></i> ثبت‌نام
-                </button>
-              </form>
-           
             
-            <div class="auth-footer">
-                قبلاً ثبت‌نام کرده‌اید؟ <a href="/login" class="auth-link">وارد شوید</a>
+            <div class="form-group">
+                <label for="password">رمز عبور</label>
+                <input type="password" id="password" name="password" autocomplete="new-password">
+                <div id="passwordError" class="error-message"></div>
             </div>
+            
+            <div class="form-group">
+                <label for="firstName">نام</label>
+                <input type="text" id="firstName" name="firstName" autocomplete="given-name">
+                <div id="firstNameError" class="error-message"></div>
+            </div>
+            
+            <div class="form-group">
+                <label for="lastName">نام خانوادگی</label>
+                <input type="text" id="lastName" name="lastName" autocomplete="family-name">
+                <div id="lastNameError" class="error-message"></div>
+            </div>
+            
+            <button type="submit" id="submit">ثبت نام</button>
+        </form>
+        
+        <div class="form-footer">
+            قبلاً حساب کاربری دارید؟ <a href="/login">ورود</a>
         </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
-      document.getElementById('signupForm').addEventListener('submit', async (e) => {
-        e.preventDefault();
-        
-        // 1. جمع‌آوری داده‌های فرم
-        const formData = new FormData(e.target);
-        const data = Object.fromEntries(formData);
-        
-        try {
-          // 2. ارسال درخواست به سرور
-          const response = await fetch('/signUp-person', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(data)
-          });
-    
-          // 3. پردازش پاسخ
-          const result = await response.json();
-    
-          if (!response.ok) {
-            throw new Error(result.message || 'خطا در ثبت نام');
-          }
-    
-          // 4. نمایش پیغام موفقیت
-          Swal.fire({
-            icon: 'success',
-            title: 'موفقیت!',
-            text: result.message,
-            confirmButtonText: 'باشه'
-          }).then(() => {
-            // 5. انتقال به صفحه پروفایل یا لاگین
-        }).then(() => {
-        window.location.href = '/profile';
-     
-          });
-    
-        } catch (error) {
-          // 6. مدیریت خطاها
-          Swal.fire({
-            icon: 'error',
-            title: 'خطا!',
-            text: error.message || 'مشکلی در ثبت نام پیش آمد',
-            confirmButtonText: 'متوجه شدم'
-          });
-          console.error('Error:', error);
-        }
-      });
-    </script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // تعریف تمام فیلدهای ورودی و توابع اعتبارسنجی آنها
+            const input = document.querySelectorAll('input');
+            const inputs = {
+                username: {
+                    element: document.getElementById('username'),
+                    error: document.getElementById('usernameError'),
+                    validate: function (value) {
+                        if (value === '') return 'این فیلد نمی‌تواند خالی باشد';
+                        if (value.length < 3) return 'نام کاربری باید حداقل 3 کاراکتر داشته باشد';
+                        if (!/^[a-zA-Z0-9_]+$/.test(value)) return 'فقط حروف، اعداد و _ مجاز هستند';
+                        return null;
+                    }
+                },
+                password: {
+                    element: document.getElementById('password'),
+                    error: document.getElementById('passwordError'),
+                    validate: function (value) {
+                        if (value === '') return 'این فیلد نمی‌تواند خالی باشد';
+                        if (value.length < 6) return 'رمز عبور باید حداقل 6 کاراکتر داشته باشد';
+                        return null;
+                    }
+                },
+                firstName: {
+                    element: document.getElementById('firstName'),
+                    error: document.getElementById('firstNameError'),
+                    validate: function (value) {
+                        return null; // موقتاً غیرفعال
+                    }
+                },
+                lastName: {
+                    element: document.getElementById('lastName'),
+                    error: document.getElementById('lastNameError'),
+                    validate: function (value) {
+                        return null; // موقتاً غیرفعال
+                    }
+                }
+            };
 
+            // متغیر برای تایمر تاخیر بررسی نام کاربری
+            let debounceTimer;
+
+            // تنظیم رویداد blur برای تمام فیلدها
+            Object.values(inputs).forEach(input => {
+                input.element.addEventListener('blur', function () {
+                    const value = this.value.trim();
+                    const errorMessage = input.validate(value);
+                    input.error.textContent = errorMessage || '';
+                });
+            });
+
+            // رویداد خاص برای بررسی نام کاربری
+            inputs.username.element.addEventListener('input', function (e) {
+                const username = e.target.value.trim();
+                clearTimeout(debounceTimer);
+
+                // اگر خالی است پیام قبلی را پاک کن
+                if (username === '') {
+                    inputs.username.error.textContent = '';
+                    return;
+                }
+
+                // اعتبارسنجی اولیه
+                if (username.length < 3) {
+                    inputs.username.error.textContent = 'نام کاربری باید حداقل 3 کاراکتر داشته باشد';
+                    return;
+                }
+
+                if (!/^[a-zA-Z0-9_]+$/.test(username)) {
+                    inputs.username.error.textContent = 'فقط حروف، اعداد و _ مجاز هستند';
+                    return;
+                }
+
+                // تاخیر برای بررسی سرور
+                debounceTimer = setTimeout(() => {
+                    checkUsernameAvailability(username);
+                }, 500);
+            });
+
+            // اضافه کردن رویداد focus برای فیلد نام کاربری
+            const fields = [
+                { element: document.getElementById('username'), error: document.getElementById('usernameError') },
+                { element: document.getElementById('password'), error: document.getElementById('passwordError') },
+                { element: document.getElementById('firstName'), error: document.getElementById('firstNameError') },
+                { element: document.getElementById('lastName'), error: document.getElementById('lastNameError') }
+            ];
+
+            // اضافه کردن رویداد focus برای تمام فیلدها
+            fields.forEach(field => {
+                field.element.addEventListener('focus', function () {
+                    // پاک کردن پیام خطا هنگام فوکوس
+                    field.error.textContent = '';
+                    field.error.className = 'error-message';
+                });
+            });
+
+            // تابع بررسی نام کاربری در سرور
+            async function checkUsernameAvailability(username) {
+                try {
+                    inputs.username.error.textContent = 'در حال بررسی...';
+                    inputs.username.error.className = 'error-message checking';
+
+                    const response = await fetch(`/api/check-username?username=${encodeURIComponent(username)}`);
+                    const data = await response.json();
+
+                    if (data.status === 'success') {
+                        if (data.available) {
+                            inputs.username.error.textContent = 'نام کاربری آزاد است';
+                            inputs.username.error.className = 'error-message available';
+                        } else {
+                            inputs.username.error.textContent = 'این نام کاربری قبلاً ثبت شده است';
+                            inputs.username.error.className = 'error-message';
+                        }
+                    } else {
+                        inputs.username.error.textContent = data.message || 'خطا در بررسی نام کاربری';
+                        inputs.username.error.className = 'error-message';
+                    }
+                } catch (error) {
+                    console.error('Error checking username:', error);
+                    inputs.username.error.textContent = 'خطا در اتصال به سرور';
+                    inputs.username.error.className = 'error-message';
+                }
+            }
+
+            // رویداد ارسال فرم
+            document.getElementById('submit').addEventListener('click', async function (e) {
+                e.preventDefault();
+                let isValid = true;
+
+                // اعتبارسنجی تمام فیلدها
+                Object.values(inputs).forEach(input => {
+                    const value = input.element.value.trim();
+                    const errorMessage = input.validate(value);
+
+                    if (errorMessage) {
+                        input.error.textContent = errorMessage;
+                        isValid = false;
+                    }
+                });
+
+                // اعتبارسنجی اضافی برای نام کاربری
+                const username = inputs.username.element.value.trim();
+                if (isValid && username.length < 3) {
+                    inputs.username.error.textContent = 'نام کاربری باید حداقل 3 کاراکتر داشته باشد';
+                    isValid = false;
+                }
+
+                if (isValid && !/^[a-zA-Z0-9_]+$/.test(username)) {
+                    inputs.username.error.textContent = 'فقط حروف، اعداد و _ مجاز هستند';
+                    isValid = false;
+                }
+
+                if (!isValid) return;
+
+                // ارسال فرم
+                try {
+                    const response = await fetch('/api/users', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            username: username,
+                            password: inputs.password.element.value,
+                            firstName: inputs.firstName.element.value.trim(),
+                            lastName: inputs.lastName.element.value.trim()
+                        })
+                    });
+
+                    const data = await response.json();
+
+                    if (data.status === 'success') {
+                        Swal.fire({
+                            title: 'ثبت نام موفق!',
+                            text: 'ثبت نام شما با موفقیت انجام شد',
+                            icon: 'success',
+                            confirmButtonText: 'متوجه شدم',
+                            allowOutsideClick: false
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                // اول ریست فرم انجام شود
+                                document.getElementById('registrationForm').reset();
+                                
+                                // سپس انتقال به صفحه اصلی
+                                window.location.href = '/';
+                            }
+                        });
+                    } else {
+                        Swal.fire({
+                            title: 'خطا!',
+                            text: data.message || 'خطا در ثبت نام',
+                            icon: 'error',
+                            confirmButtonText: 'متوجه شدم'
+                        });
+
+                        if (data.field === 'username') {
+                            inputs.username.error.textContent = data.message;
+                        }
+                    }
+                } catch (error) {
+                    console.error('Registration error:', error);
+                    Swal.fire({
+                        title: 'خطا!',
+                        text: 'خطا در ارتباط با سرور',
+                        icon: 'error',
+                        confirmButtonText: 'متوجه شدم'
+                    });
+                }
+            });
+        });
+
+        // برداشتن تمام محدودیت‌های CSS روی فیلدها
+        document.getElementById('firstName').style.pointerEvents = 'auto';
+        document.getElementById('firstName').style.opacity = '1';
+        document.getElementById('firstName').style.userSelect = 'text';
+        document.getElementById('lastName').style.pointerEvents = 'auto';
+        document.getElementById('lastName').style.opacity = '1';
+        document.getElementById('lastName').style.userSelect = 'text';
+
+        // بررسی وضعیت فیلدها
+        console.log('firstName:', {
+            disabled: document.getElementById('firstName').disabled,
+            readonly: document.getElementById('firstName').readOnly,
+            style: window.getComputedStyle(document.getElementById('firstName'))
+        });
+    </script>
 </body>
 </html>

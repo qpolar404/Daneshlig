@@ -1,51 +1,31 @@
 const mongoose = require('mongoose');
+
 const lessonSchema = new mongoose.Schema({
-  // پایه تحصیلی
-  grade: {
-    type: String,
-    required: true,
-    trim: true
-  },
+  grade: { type: String, required: true, trim: true },
+  bookName: { type: String, required: true, trim: true },
+  lessonName: { type: String, required: true, trim: true },
 
-  // نام کتاب
-  bookName: {
-    type: String,
-    required: true,
-    trim: true
-  },
-
-  // نام درس
-  lessonName: {
-    type: String,
-    required: true,
-    trim: true
-  },
-
-  // بخش‌های درس (آرایه‌ای از آبجکت‌ها)
+  // آرایه بخش‌ها
   sections: [{
-    // عنوان بخش
-    title: {
-      type: String,
-      required: true,
-      trim: true
-    },
+    title: { type: String, required: true, trim: true },
+    content: { type: String, trim: true }, // متن بخش (اختیاری)
     
-    // محتوای آموزشی
-    content: {
-      type: String,
-      required: true,
-      trim: true
-    },
-    
-    // ترتیب نمایش (اختیاری)
-    order: {
-      type: Number,
-      default: 0
-    }
+
+    // لینک ویدیو (آپارات)
+   videoEmbedCode: { type: String, trim: true },
+
+    order: { type: Number, default: 0 }
+  }],
+
+  // آرایه کوییزها مربوط به درس
+  quizzes: [{
+    question: { type: String, required: true, trim: true },
+    image: { filename: String, data: String }, // تصویر کوییز
+    options: [{
+      text: { type: String, required: true },
+      isCorrect: { type: Boolean, default: false }
+    }]
   }]
-}, { 
-  timestamps: true 
-});
+}, { timestamps: true });
 
-
-module.exports= mongoose.model('Teaches', lessonSchema)
+module.exports = mongoose.model('Teaches', lessonSchema);

@@ -203,10 +203,10 @@
         </header>
 
         <main>
-            <h2 class="section-title">فصل‌های درس</h2>
+            <h2 class="section-title">آموزش فصل‌های کتاب</h2>
             <ul class="chapters-list">
                 <% lesson.titles.forEach((title, index)=> { %>
-                    <li class="chapter-item">
+                    <li class="chapter-item teach">
                         <i class="fas fa-book-open chapter-number"></i>
                         <span id="title">
                             <%= title %>
@@ -217,49 +217,85 @@
             </ul>
         </main>
 
+        <main>
+            <h2 class="section-title">کوییز فصل‌های کتاب</h2>
+            <ul class="chapters-list">
+                <% lesson.titles.forEach(title=> { %>
+                    <li class="chapter-item quiz" data-title="<%= title %>">
+                        <i class="fas fa-book-open chapter-number"></i>
+                        <span>
+                            <%= title %>
+                        </span>
+                    </li>
+                    <% }) %>
+            </ul>
+        </main>
+
         <footer>
             <p>ساخته شده با ❤️ برای آینده‌سازان ایران</p>
         </footer>
     </div>
 
     <script>
+
         document.querySelectorAll('.chapter-item').forEach(item => {
-    item.addEventListener('click', async (e) => {
-        e.preventDefault();
-        
-        const grade = document.getElementById('grade').innerText.trim();
-        const subject = document.getElementById('subject').innerText.trim();
-        const title = item.querySelector('span').innerText.trim();
+            item.addEventListener('click', async (e) => {
+                e.preventDefault();
 
-        try {
-            const response = await fetch('/api/lessons', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    grade: grade,
-                    subject: subject,
-                    title: title
-                })
+                const grade = document.getElementById('grade').innerText.trim();
+                const subject = document.getElementById('subject').innerText.trim();
+                const title = item.dataset.title?.trim() || item.querySelector('span').innerText.trim();
+
+                try {
+                    let endpoint;
+                    let bodyData;
+
+                    if (item.classList.contains('quiz')) {
+                        endpoint = '/api/quizzes';
+                        bodyData = {
+                            grade: grade,
+                            subject: subject,
+                            title: title
+                        };
+                    } else if (item.classList.contains('teach')) {
+                        endpoint = '/api/lessons';
+                        bodyData = {
+                            grade: grade,
+                            subject: subject,
+                            title: title
+                        };
+                    } else {
+                        alert('نوع آیتم نامعتبر است');
+                        return;
+                    }
+
+                    console.log('Endpoint:', endpoint);
+                    console.log('Body Data:', bodyData);
+
+                    const response = await fetch(endpoint, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(bodyData)
+                    });
+
+                    const data = await response.json();
+
+                    if (data.success && data.redirectUrl) {
+                        window.location.href = data.redirectUrl;
+                    } else {
+                        alert(data.message || "درس مورد نظر یافت نشد");
+                    }
+                } catch (error) {
+                    console.error('Error:', error);
+                    alert('مشکلی در ارتباط با سرور پیش آمد!');
+                }
             });
+        });
 
-            const data = await response.json();
-
-            if (data.success && data.redirectUrl) {
-                // روش ۱: هدایت به صفحه جدید با پارامترهای URL
-                window.location.href = data.redirectUrl;
-                
-            } else {
-                alert(data.message || "درس مورد نظر یافت نشد");
-            }
-        } catch (error) {
-            console.error('Error:', error);
-            alert('مشکلی در ارتباط با سرور پیش آمد!');
-        }
-    });
-});
     </script>
+
 </body>
 
 </html>

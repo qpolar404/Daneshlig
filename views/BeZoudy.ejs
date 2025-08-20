@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>بخش در حال تکمیل</title>
+    <link rel="stylesheet" href="css/base.css">
     <style>
           @font-face {
             font-family: 'BN';
@@ -17,7 +18,7 @@
         }
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            background: #172a45;
             margin: 0;
             padding: 0;
             height: 100vh;
@@ -29,7 +30,7 @@
         }
         
         .container {
-            background-color: rgba(255, 255, 255, 0.9);
+            background-color:#02020291;
             border-radius: 15px;
             padding: 40px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
@@ -39,7 +40,7 @@
         }
         
         h1 {
-            color: #2c3e50;
+            color: #678fb7;
             margin-bottom: 20px;
             font-size: 28px;
         }
@@ -48,7 +49,7 @@
             font-size: 18px;
             line-height: 1.6;
             margin-bottom: 30px;
-            color: #555;
+            color: #abacac;
         }
         
         .icon {
@@ -101,7 +102,12 @@
         }
     </style>
 </head>
-<body>
+<body class="best-body">
+    <nav class="navbar" id="navbar" dir="ltr">
+
+        <%- include('partials/nav') %>
+
+    </nav>
     <div class="container">
         <div class="icon">🚧</div>
         <h1>این بخش هنوز تکمیل نشده است</h1>

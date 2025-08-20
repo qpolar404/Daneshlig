@@ -1,0 +1,147 @@
+
+
+// app.get('/save/book',()=>{
+//     const book = new Book({
+//         titles:["درس اول","درس  دوم","درس سوم","درس چهارم","درس پنجم","درس ششم","درس هفتم","درس هشتم","درس نهم","درس دهم",],
+//         nameId:'LAS',
+//         grade:'هشتم',
+//         subject:'عربی',
+//         discripdescription:"نام درس های عربی هشتم"
+//     })
+
+//     book.save() 
+//      .then(savedDoc => res.json({
+//        success: true,
+//        message: " ok",
+//        data: savedDoc
+//      }))
+//      .catch(err => res.status(500).json({
+//        success: false,
+//        message: "خطا در ذخیره اطلاعات",
+//        error: err.message
+//      }));
+// })
+// app.get('/teaches/save-science-8th', (req, res) => {
+//    const teach = new Teach({
+//      "grade": "هشتم",
+//      "bookName": "علوم",
+//      "lessonName": "فصل اول",
+//      "sections": [
+//        {
+//          "title": "تعریف مخلوط",
+//          "content": "مخلوط به ماده‌ای گفته می‌شود که از ترکیب دو یا چند ماده خالص به وجود آمده باشد.\n\nانواع مخلوط:\n1. مخلوط همگن (محلول): اجزاء به صورت یکنواخت پراکنده شده‌اند مثل آب نمک\n2. مخلوط ناهمگن: اجزاء به صورت غیریکنواخت پراکنده شده‌اند مثل سالاد",
+//          "order": 1
+//        },
+//        {
+//          "title": "اجزای تشکیل دهنده مخلوط",
+//          "content": "1. فاز مایع: مانند آب در آب نمک\n2. فاز جامد: مانند نمک در آب نمک\n3. فاز گاز: مانند هوا در نوشابه\n\nنکته: در مخلوط همگن فقط یک فاز قابل مشاهده است.",
+//          "order": 2
+//        },
+//        {
+//          "title": "روش‌های جداسازی مخلوط‌ها",
+//          "content": "1. صاف کردن: برای جدا کردن مواد جامد از مایع\n2. تبخیر: برای جدا کردن مواد حل شده در مایعات\n3. تقطیر: برای جدا کردن مایعات مخلوط\n4. سانتریفیوژ: برای جدا کردن مواد با چگالی مختلف\n5. کروماتوگرافی: برای جدا کردن مواد حل شده",
+//          "order": 3
+//        },
+//        {
+//          "title": "محلول‌ها و غلظت",
+//          "content": "محلول = حلال + حل شونده\n\nغلظت مقدار ماده حل شده در مقدار معینی از حلال است.\n\nواحدهای غلظت:\n- گرم بر لیتر\n- درصد جرمی\n- مولاریته",
+//          "order": 4
+//        },
+//        {
+//          "title": "کاربردهای عملی",
+//          "content": "1. تصفیه آب: جداسازی ناخالصی‌ها از آب\n2. صنایع غذایی: تولید نوشیدنی‌ها\n3. پزشکی: تولید داروها\n4. محیط زیست: بازیافت مواد\n5. صنعت نفت: پالایش نفت خام",
+//          "order": 5
+//        }
+//      ]
+//    });
+
+//    teach.save()
+//      .then(savedDoc => res.json({
+//        success: true,
+//        message: "فصل اول علوم هشتم با موفقیت ذخیره شد",
+//        data: savedDoc
+//      }))
+//      .catch(err => res.status(500).json({
+//        success: false,
+//        message: "خطا در ذخیره اطلاعات",
+//        error: err.message
+//      }));
+// });
+
+
+
+
+
+app.get('/creatquiz',(req,res)=>{
+  const quiz = new Quiz({
+  title: "درس اول",
+  grade: "هفتم",
+  subject: "ریاضی", // این خط را اضافه کنید
+  questions: [
+    {
+      text: "کدام یک از گزینه‌های زیر عدد صحیح منفی است؟",
+      options: [
+        { text: "۵", isCorrect: false },
+        { text: "۰", isCorrect: false },
+        { text: "-۳", isCorrect: true },
+        { text: "۲.۵", isCorrect: false }
+      ],
+      explanation: "اعداد صحیح منفی به اعدادی گفته می‌شود که کوچک‌تر از صفر هستند و با علامت منفی نمایش داده می‌شوند.",
+      difficulty: 1
+    },
+    {
+      text: "حاصل جمع (-۵) + (+۳) کدام است؟",
+      options: [
+        { text: "۸", isCorrect: false },
+        { text: "۲", isCorrect: false },
+        { text: "-۲", isCorrect: true },
+        { text: "-۸", isCorrect: false }
+      ],
+      explanation: "وقتی عدد منفی بزرگ‌تر باشد، علامت جواب منفی می‌شود و تفاضل آنها را حساب می‌کنیم: ۵ - ۳ = ۲ → جواب -۲",
+      difficulty: 2
+    },
+    {
+      text: "کدام گزینه نمایش صحیح عدد «منفی هفت» است؟",
+      options: [
+        { text: "۷", isCorrect: false },
+        { text: "-۷", isCorrect: true },
+        { text: "۷-", isCorrect: false },
+        { text: "۷+", isCorrect: false }
+      ],
+      explanation: "نوشتن علامت منفی قبل از عدد، روش استاندارد نمایش اعداد منفی است.",
+      difficulty: 1
+    },
+    {
+      text: "حاصل ضرب (-۴) × (+۳) کدام است؟",
+      options: [
+        { text: "۱۲", isCorrect: false },
+        { text: "-۱۲", isCorrect: true },
+        { text: "۷", isCorrect: false },
+        { text: "-۷", isCorrect: false }
+      ],
+      explanation: "ضرب عدد منفی در مثبت همیشه نتیجه منفی دارد: ۴ × ۳ = ۱۲ → جواب -۱۲",
+      difficulty: 2
+    },
+    {
+      text: "کدام گزینه درباره محور اعداد صحیح نادرست است؟",
+      options: [
+        { text: "اعداد سمت راست صفر مثبت هستند", isCorrect: false },
+        { text: "اعداد سمت چپ صفر منفی هستند", isCorrect: false },
+        { text: "صفر نه مثبت است نه منفی", isCorrect: false },
+        { text: "عدد -۵ از -۲ بزرگتر است", isCorrect: true }
+      ],
+      explanation: "در محور اعداد، هرچه به سمت چپ برویم اعداد کوچک‌تر می‌شوند، پس -۵ از -۲ کوچک‌تر است.",
+      difficulty: 3
+    }
+  ]
+})
+
+quiz.save().then(result =>res.send(result)).catch(err=>res.status(err))
+})
+
+
+// 404 handler
+app.use((req, res) => res.status(404).render('404', { title: 'صفحه پیدا نشد' }));
+
+
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
